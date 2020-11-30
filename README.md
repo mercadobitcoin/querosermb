@@ -10,7 +10,6 @@ Criar um aplicativo para consultar a [CoinAPI.io](https://docs.coinapi.io/#list-
 
 ### **Must Have**
 -   **Lista de moedas**
-	- Paginação com scroll infinito
     - Pull to refresh
     - Exibir, pelo menos, os campos: "name", "exchange_id" e "volume_1day_usd"
     - Ao tocar em um item, deve mostrar os detalhes da moeda
