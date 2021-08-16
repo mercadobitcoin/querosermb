@@ -2,7 +2,7 @@
 
 Somos a maior plataforma de negociação de criptomoedas e ativos alternativos da América Latina, criada para elevar a experiência de quem vivencia essa revolução, entregando o melhor serviço de negociação de ativos alternativos, com liberdade, segurança e liquidez. Sendo assim, nós existimos para mudar a maneira como as pessoas lidam com o dinheiro através da tecnologia.
 
-### Projeto
+### Objetivo
 
 O objetivo deste desafio é entender seus conhecimentos sobre a plataforma iOS, estilo de programação e como você resolve desafios técnicos.
 
