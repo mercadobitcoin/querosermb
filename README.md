@@ -7,7 +7,7 @@ Somos a maior plataforma de negociação de criptomoedas e ativos alternativos d
 O objetivo deste desafio é entender seus conhecimentos sobre a plataforma iOS, estilo de programação e como você resolve desafios técnicos.
 
 ### Projeto
-Criar um aplicativo para consultar a [coinapi.io](https://docs.coinapi.io/#list-all-exchanges) e trazer as exchanges em forma de lista.
+Criar um aplicativo para consultar a [coinapi.io](https://docs.coinapi.io/?shell#list-all-exchanges-get) e trazer as exchanges em forma de lista.
 
 ### Features
 -   **Tela de listagem:**
