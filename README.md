@@ -14,7 +14,7 @@ Criar um aplicativo para consultar a [coinapi.io](https://docs.coinapi.io/?shell
     - Exibir, pelo menos, os campos: `name`, `exchange_id` e `volume_1day_usd`
     - Ao tocar em um item deve ser exibida a tela de detalhes.
 -   **Tela de detalhe:**
-    - Exibe os detalhes do ativo.
+    - Exibe os detalhes da exchange.
 
 ### Requisitos Técnicos (iOS)
 - Swift 5+
