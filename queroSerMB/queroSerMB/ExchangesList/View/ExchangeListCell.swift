@@ -23,6 +23,14 @@ class ExchangeListCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private lazy var exchangeIdLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = Colors.white.color
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     private lazy var exchangeVolumeTransactionDayLabel: UILabel = {
         let label = UILabel()
@@ -56,7 +64,7 @@ class ExchangeListCell: UITableViewCell {
         self.layer.masksToBounds = true
         self.selectionStyle = .none
         
-        addSubviews(exchangeiconImageView, exchangeNameLabel, exchangeVolumeTransactionDayLabel, timePeriodLabel)
+        addSubviews(exchangeiconImageView, exchangeNameLabel, exchangeIdLabel, exchangeVolumeTransactionDayLabel, timePeriodLabel)
         
         NSLayoutConstraint.activate([
             exchangeiconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Spacing.space5),
@@ -69,10 +77,15 @@ class ExchangeListCell: UITableViewCell {
             exchangeNameLabel.leadingAnchor.constraint(equalTo: exchangeiconImageView.trailingAnchor, constant: Spacing.space1),
             exchangeNameLabel.centerYAnchor.constraint(equalTo: exchangeiconImageView.centerYAnchor)
         ])
+        
+        NSLayoutConstraint.activate([
+            exchangeIdLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Spacing.space5),
+            exchangeIdLabel.topAnchor.constraint(equalTo: exchangeiconImageView.bottomAnchor, constant: Spacing.space2)
+        ])
 
         NSLayoutConstraint.activate([
             exchangeVolumeTransactionDayLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Spacing.space5),
-            exchangeVolumeTransactionDayLabel.topAnchor.constraint(equalTo: exchangeiconImageView.bottomAnchor, constant: Spacing.space2)
+            exchangeVolumeTransactionDayLabel.topAnchor.constraint(equalTo: exchangeIdLabel.bottomAnchor, constant: Spacing.space2)
         ])
 
         NSLayoutConstraint.activate([
@@ -86,6 +99,7 @@ class ExchangeListCell: UITableViewCell {
         exchangeNameLabel.text = viewModel.name
         exchangeVolumeTransactionDayLabel.text = viewModel.dailyVolumeUsdText
         exchangeiconImageView.image = viewModel.exchangeIconImage
+        exchangeIdLabel.text = viewModel.id
         
         viewModel.onLogoImageUpdated = { [weak self] image in
             DispatchQueue.main.async {

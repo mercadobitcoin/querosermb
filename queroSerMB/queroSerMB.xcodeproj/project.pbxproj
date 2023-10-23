@@ -24,7 +24,7 @@
 		ED1B68772AE48D4200F597F2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68762AE48D4200F597F2 /* Colors.swift */; };
 		ED1B687A2AE48F5F00F597F2 /* ExchangeSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68792AE48F5F00F597F2 /* ExchangeSearchBar.swift */; };
 		ED1B687C2AE4907900F597F2 /* ExchangeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B687B2AE4907900F597F2 /* ExchangeListCell.swift */; };
-		ED1B687E2AE492D900F597F2 /* ExchangeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B687D2AE492D900F597F2 /* ExchangeTableViewController.swift */; };
+		ED1B687E2AE492D900F597F2 /* ExchangeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B687D2AE492D900F597F2 /* ExchangeTableView.swift */; };
 		ED1B68802AE4955C00F597F2 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B687F2AE4955C00F597F2 /* UIViewExtension.swift */; };
 		ED1B68822AE4974E00F597F2 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68812AE4974E00F597F2 /* Spacing.swift */; };
 		ED1B68852AE4A0D400F597F2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68842AE4A0D400F597F2 /* NetworkService.swift */; };
@@ -33,6 +33,13 @@
 		ED1B688C2AE4AFD000F597F2 /* NumberFormatterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B688B2AE4AFD000F597F2 /* NumberFormatterExtension.swift */; };
 		ED1B688E2AE4BCDA00F597F2 /* URLSessionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B688D2AE4BCDA00F597F2 /* URLSessionExtension.swift */; };
 		ED1B68902AE4BD1500F597F2 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B688F2AE4BD1500F597F2 /* UITableViewExtension.swift */; };
+		ED1B68932AE5869800F597F2 /* ExchangeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68922AE5869800F597F2 /* ExchangeDetailViewController.swift */; };
+		ED1B68952AE586A100F597F2 /* ExchangeDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68942AE586A100F597F2 /* ExchangeDetailInteractor.swift */; };
+		ED1B68972AE586A900F597F2 /* ExchangeDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68962AE586A900F597F2 /* ExchangeDetailPresenter.swift */; };
+		ED1B689B2AE586BB00F597F2 /* ExchangeDetailFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B689A2AE586BB00F597F2 /* ExchangeDetailFactory.swift */; };
+		ED1B689E2AE5903400F597F2 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ED1B689D2AE5903400F597F2 /* DGCharts */; };
+		ED1B68A02AE5903400F597F2 /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = ED1B689F2AE5903400F597F2 /* DGChartsDynamic */; };
+		ED1B68A32AE5991300F597F2 /* OHLCVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68A22AE5991300F597F2 /* OHLCVModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +81,7 @@
 		ED1B68762AE48D4200F597F2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		ED1B68792AE48F5F00F597F2 /* ExchangeSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeSearchBar.swift; sourceTree = "<group>"; };
 		ED1B687B2AE4907900F597F2 /* ExchangeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeListCell.swift; sourceTree = "<group>"; };
-		ED1B687D2AE492D900F597F2 /* ExchangeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTableViewController.swift; sourceTree = "<group>"; };
+		ED1B687D2AE492D900F597F2 /* ExchangeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeTableView.swift; sourceTree = "<group>"; };
 		ED1B687F2AE4955C00F597F2 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		ED1B68812AE4974E00F597F2 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		ED1B68842AE4A0D400F597F2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -83,6 +90,11 @@
 		ED1B688B2AE4AFD000F597F2 /* NumberFormatterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterExtension.swift; sourceTree = "<group>"; };
 		ED1B688D2AE4BCDA00F597F2 /* URLSessionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionExtension.swift; sourceTree = "<group>"; };
 		ED1B688F2AE4BD1500F597F2 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
+		ED1B68922AE5869800F597F2 /* ExchangeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeDetailViewController.swift; sourceTree = "<group>"; };
+		ED1B68942AE586A100F597F2 /* ExchangeDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeDetailInteractor.swift; sourceTree = "<group>"; };
+		ED1B68962AE586A900F597F2 /* ExchangeDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeDetailPresenter.swift; sourceTree = "<group>"; };
+		ED1B689A2AE586BB00F597F2 /* ExchangeDetailFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeDetailFactory.swift; sourceTree = "<group>"; };
+		ED1B68A22AE5991300F597F2 /* OHLCVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OHLCVModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +102,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED1B68A02AE5903400F597F2 /* DGChartsDynamic in Frameworks */,
+				ED1B689E2AE5903400F597F2 /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +149,7 @@
 			children = (
 				ED1B68832AE4A0BB00F597F2 /* Network */,
 				ED1B68732AE48C9700F597F2 /* DesignSystem */,
+				ED1B68912AE5861000F597F2 /* ExchangeDetail */,
 				ED1B68652AE47D1D00F597F2 /* ExchangesList */,
 				ED1B68332AE479BE00F597F2 /* AppDelegate.swift */,
 				ED1B68352AE479BE00F597F2 /* SceneDelegate.swift */,
@@ -204,7 +219,7 @@
 			children = (
 				ED1B68792AE48F5F00F597F2 /* ExchangeSearchBar.swift */,
 				ED1B687B2AE4907900F597F2 /* ExchangeListCell.swift */,
-				ED1B687D2AE492D900F597F2 /* ExchangeTableViewController.swift */,
+				ED1B687D2AE492D900F597F2 /* ExchangeTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -226,6 +241,26 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		ED1B68912AE5861000F597F2 /* ExchangeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				ED1B68A12AE5990200F597F2 /* Model */,
+				ED1B68922AE5869800F597F2 /* ExchangeDetailViewController.swift */,
+				ED1B68942AE586A100F597F2 /* ExchangeDetailInteractor.swift */,
+				ED1B68962AE586A900F597F2 /* ExchangeDetailPresenter.swift */,
+				ED1B689A2AE586BB00F597F2 /* ExchangeDetailFactory.swift */,
+			);
+			path = ExchangeDetail;
+			sourceTree = "<group>";
+		};
+		ED1B68A12AE5990200F597F2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED1B68A22AE5991300F597F2 /* OHLCVModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -242,6 +277,10 @@
 			dependencies = (
 			);
 			name = queroSerMB;
+			packageProductDependencies = (
+				ED1B689D2AE5903400F597F2 /* DGCharts */,
+				ED1B689F2AE5903400F597F2 /* DGChartsDynamic */,
+			);
 			productName = queroSerMB;
 			productReference = ED1B68302AE479BE00F597F2 /* queroSerMB.app */;
 			productType = "com.apple.product-type.application";
@@ -314,6 +353,9 @@
 				Base,
 			);
 			mainGroup = ED1B68272AE479BE00F597F2;
+			packageReferences = (
+				ED1B689C2AE58F9200F597F2 /* XCRemoteSwiftPackageReference "Charts" */,
+			);
 			productRefGroup = ED1B68312AE479BE00F597F2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -356,16 +398,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED1B68932AE5869800F597F2 /* ExchangeDetailViewController.swift in Sources */,
 				ED1B688E2AE4BCDA00F597F2 /* URLSessionExtension.swift in Sources */,
 				ED1B68342AE479BE00F597F2 /* AppDelegate.swift in Sources */,
 				ED1B68882AE4A16700F597F2 /* ExchangeModel.swift in Sources */,
 				ED1B68772AE48D4200F597F2 /* Colors.swift in Sources */,
 				ED1B68822AE4974E00F597F2 /* Spacing.swift in Sources */,
+				ED1B68972AE586A900F597F2 /* ExchangeDetailPresenter.swift in Sources */,
 				ED1B68362AE479BE00F597F2 /* SceneDelegate.swift in Sources */,
+				ED1B68A32AE5991300F597F2 /* OHLCVModel.swift in Sources */,
 				ED1B68902AE4BD1500F597F2 /* UITableViewExtension.swift in Sources */,
 				ED1B687A2AE48F5F00F597F2 /* ExchangeSearchBar.swift in Sources */,
 				ED1B68802AE4955C00F597F2 /* UIViewExtension.swift in Sources */,
 				ED1B68692AE47D4E00F597F2 /* ExchangesListPresenter.swift in Sources */,
+				ED1B68952AE586A100F597F2 /* ExchangeDetailInteractor.swift in Sources */,
 				ED1B687C2AE4907900F597F2 /* ExchangeListCell.swift in Sources */,
 				ED1B688A2AE4AC3500F597F2 /* ExchangeCellViewModel.swift in Sources */,
 				ED1B686B2AE47D5A00F597F2 /* ExchangesListCoordinator.swift in Sources */,
@@ -376,7 +422,8 @@
 				ED1B686D2AE47E8A00F597F2 /* ExchangesListFactory.swift in Sources */,
 				ED1B688C2AE4AFD000F597F2 /* NumberFormatterExtension.swift in Sources */,
 				ED1B68722AE48C3100F597F2 /* UISearchTextFieldExtension.swift in Sources */,
-				ED1B687E2AE492D900F597F2 /* ExchangeTableViewController.swift in Sources */,
+				ED1B689B2AE586BB00F597F2 /* ExchangeDetailFactory.swift in Sources */,
+				ED1B687E2AE492D900F597F2 /* ExchangeTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +762,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ED1B689C2AE58F9200F597F2 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ED1B689D2AE5903400F597F2 /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED1B689C2AE58F9200F597F2 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+		ED1B689F2AE5903400F597F2 /* DGChartsDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED1B689C2AE58F9200F597F2 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGChartsDynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ED1B68282AE479BE00F597F2 /* Project object */;
 }

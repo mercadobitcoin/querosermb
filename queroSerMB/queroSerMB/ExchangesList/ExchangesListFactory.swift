@@ -8,8 +8,8 @@
 import UIKit
 
 enum ExchangesListFactory {
-    static func make() -> ExchangesListViewController {
-        let coordinator = ExchangesListCoordinator()
+    static func make(navigationController: UINavigationController) -> ExchangesListViewController {
+        let coordinator = ExchangesListCoordinator(navigationController: navigationController)
         let presenter = ExchangesListPresenter(coordinator: coordinator)
         let service: NetworkServiceProtocol = NetworkService()
         let interactor = ExchangesListInteractor(presenter: presenter, service: service)

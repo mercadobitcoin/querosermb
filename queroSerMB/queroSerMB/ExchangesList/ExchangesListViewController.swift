@@ -13,12 +13,22 @@ protocol ExchangesListViewControllerProtocol: AnyObject {
 
 class ExchangesListViewController: UIViewController {
     private lazy var searchBar = ExchangeSearchBar()
-    private lazy var exchangeTable = ExchangesTableViewController()
+    private lazy var exchangeTable = ExchangesTableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         buildView()
         interactor.callServices()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     private let interactor: ExchangesListInteractorProtocol
@@ -27,6 +37,7 @@ class ExchangesListViewController: UIViewController {
         self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
         searchBar.delegate = self
+        exchangeTable.exchangesDelegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -36,11 +47,7 @@ class ExchangesListViewController: UIViewController {
 
 extension ExchangesListViewController: ViewSetup {
     func setupHierarchy() {
-        view.addSubview(searchBar)
-        
-        addChild(exchangeTable)
-        view.addSubview(exchangeTable.tableView)
-        exchangeTable.didMove(toParent: self)
+        view.addSubviews(searchBar, exchangeTable)
     }
     
     func setupConstraints() {
@@ -51,12 +58,11 @@ extension ExchangesListViewController: ViewSetup {
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Spacing.space3)
         ])
         
-        exchangeTable.tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            exchangeTable.tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: Spacing.space3),
-            exchangeTable.tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            exchangeTable.tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space3),
-            exchangeTable.tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Spacing.space3)
+            exchangeTable.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: Spacing.space3),
+            exchangeTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            exchangeTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space3),
+            exchangeTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Spacing.space3)
         ])
     }
     
@@ -64,13 +70,30 @@ extension ExchangesListViewController: ViewSetup {
         view.backgroundColor = Colors.offBlack.color
     }
 }
-extension ExchangesListViewController: UISearchTextFieldDelegate {
-    
+extension ExchangesListViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            if let currentText = textField.text, let textRange = Range(range, in: currentText) {
+                let updatedText = currentText.replacingCharacters(in: textRange, with: string)
+                interactor.filterExchanges(with: updatedText)
+            }
+            return true
+        }
+        
+        func textFieldShouldClear(_ textField: UITextField) -> Bool {
+            interactor.filterExchanges(with: "")
+            return true
+        }
+}
+
+extension ExchangesListViewController: ExchangesTableViewDelegate {
+    func didTapExchange(at indexPath: IndexPath) {
+        interactor.showDetails(indexPath: indexPath)
+    }
 }
 
 extension ExchangesListViewController: ExchangesListViewControllerProtocol {
     func displayList(exchangeList: [ExchangeCellViewModel]) {
         exchangeTable.exchangeList = exchangeList
-        exchangeTable.tableView.reloadData()
+        exchangeTable.reloadData()
     }
 }

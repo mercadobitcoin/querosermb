@@ -10,6 +10,8 @@ import Foundation
 protocol ExchangesListInteractorProtocol: AnyObject {
     func callServices()
     func getExchangeList() -> [ExchangeModel]
+    func filterExchanges(with text: String)
+    func showDetails(indexPath: IndexPath)
 }
 
 final class ExchangesListInteractor {
@@ -56,8 +58,25 @@ extension ExchangesListInteractor: ExchangesListInteractorProtocol {
         }
     }
 
-    
     func getExchangeList() -> [ExchangeModel] {
         exchanges
+    }
+    
+    func filterExchanges(with text: String) {
+        if text.isEmpty {
+            self.presenter.showList(exchanges: self.exchanges, exchangesLogo: self.exchangesLogos)
+        } else {
+            let filtered = exchanges.filter { exchange in
+                let matchesName = exchange.name?.lowercased().contains(text.lowercased()) ?? false
+                let matchesExchangeId = exchange.exchangeId?.lowercased().contains(text.lowercased()) ?? false
+                
+                return matchesName || matchesExchangeId
+            }
+            self.presenter.showList(exchanges: filtered, exchangesLogo: self.exchangesLogos)
+        }
+    }
+    
+    func showDetails(indexPath: IndexPath) {
+        presenter.showDetails(exchanges: self.exchanges[indexPath.section], exchangesLogo: self.exchangesLogos[indexPath.section])
     }
 }

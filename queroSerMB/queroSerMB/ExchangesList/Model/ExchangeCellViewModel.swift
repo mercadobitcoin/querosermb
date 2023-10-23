@@ -10,9 +10,10 @@ class ExchangeCellViewModel {
     var task: URLSessionDataTask?
     var onLogoImageUpdated: ((UIImage?) -> Void)?
     let name: String
+    let id: String
     let dailyVolumeUsdText: String
     var exchangeIconURL: URL?
-    var exchangeIconImage: UIImage?
+    var exchangeIconImage: UIImage? = UIImage(named: "dollarLogo")?.withTintColor(.blue)
     var hasAttemptedToDownloadImage: Bool = false
     
     var shouldDownloadImage: Bool = false {
@@ -26,6 +27,7 @@ class ExchangeCellViewModel {
     init(from model: ExchangeModel, logoUrl: URL?) {
         self.name = model.name ?? "Desconhecido"
         self.exchangeIconURL = logoUrl
+        self.id = "ID: \(model.exchangeId ?? "Desconhecido")"
         
         if let volume = model.dailyVolumeUsd {
             self.dailyVolumeUsdText = NumberFormatter.financial.string(fromValue: volume)
