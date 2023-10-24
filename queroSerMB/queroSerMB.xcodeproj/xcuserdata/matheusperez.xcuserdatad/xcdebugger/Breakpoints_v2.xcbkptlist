@@ -3,4 +3,118 @@
    uuid = "CD92F4A8-0D8F-4B07-8DE2-3FC08FB5BC8B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2060BEF4-DDC5-4EF9-A15F-06194641971E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "queroSerMB/ExchangeDetail/ExchangeDetailPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "setupLabels(data:imageData:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2060BEF4-DDC5-4EF9-A15F-06194641971E - b979e2236f531ac"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "queroSerMB.ExchangeDetailPresenter.setupLabels(data: queroSerMB.ExchangeModel, imageData: queroSerMB.ExchangeLogoModel) -&gt; ()"
+                  moduleName = "queroSerMB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matheusperez/Projetos/querosermb/queroSerMB/queroSerMB/ExchangeDetail/ExchangeDetailPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "632">
+               </Location>
+               <Location
+                  uuid = "2060BEF4-DDC5-4EF9-A15F-06194641971E - ec2becdd66c127ed"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.UIImage&gt;) -&gt; () in queroSerMB.ExchangeDetailPresenter.setupLabels(data: queroSerMB.ExchangeModel, imageData: queroSerMB.ExchangeLogoModel) -&gt; ()"
+                  moduleName = "queroSerMB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matheusperez/Projetos/querosermb/queroSerMB/queroSerMB/ExchangeDetail/ExchangeDetailPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "92452CC1-24E6-4C51-855F-4F914F15090F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "queroSerMB/ExchangeDetail/ExchangeDetailPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "setupLabels(data:imageData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9E282373-AE1D-4090-8266-7E45030F5E26"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "queroSerMB/ExchangeDetail/ExchangeDetailPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "setupLabels(data:imageData:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9E282373-AE1D-4090-8266-7E45030F5E26 - b979e2236f5318d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "queroSerMB.ExchangeDetailPresenter.setupLabels(data: queroSerMB.ExchangeModel, imageData: queroSerMB.ExchangeLogoModel) -&gt; ()"
+                  moduleName = "queroSerMB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matheusperez/Projetos/querosermb/queroSerMB/queroSerMB/ExchangeDetail/ExchangeDetailPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "512">
+               </Location>
+               <Location
+                  uuid = "9E282373-AE1D-4090-8266-7E45030F5E26 - b979e2236f5318d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "queroSerMB.ExchangeDetailPresenter.setupLabels(data: queroSerMB.ExchangeModel, imageData: queroSerMB.ExchangeLogoModel) -&gt; ()"
+                  moduleName = "queroSerMB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matheusperez/Projetos/querosermb/queroSerMB/queroSerMB/ExchangeDetail/ExchangeDetailPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "616">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

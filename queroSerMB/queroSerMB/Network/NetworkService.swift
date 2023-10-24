@@ -138,13 +138,13 @@ class NetworkService: NetworkServiceProtocol {
                     
                     let formattedTimeStart = self.dateFormatter.string(from: timeStart)
                     let formattedTimeEnd = self.dateFormatter.string(from: timeEnd)
-                    var ohlcvURLString = "\(self.baseURLString)/ohlcv/\(exchangeId)_SPOT_\(symbol.asset_id_base)_\(symbol.asset_id_quote)/history?period_id=\(periodId)&time_start=\(formattedTimeStart)&time_end=\(formattedTimeEnd)"
+                    let ohlcvURLString = "\(self.baseURLString)/ohlcv/\(exchangeId)_SPOT_\(symbol.asset_id_base)_\(symbol.asset_id_quote)/history?period_id=\(periodId)&time_start=\(formattedTimeStart)&time_end=\(formattedTimeEnd)"
                     
-                    if baseAsset == "ETH" {
-                        ohlcvURLString = "https://rest.coinapi.io/v1/ohlcv/BINANCE_SPOT_ETH_USDC/history?period_id=1HRS&time_start=2023-10-21T19:34:53.0940000Z&time_end=2023-10-22T19:34:53.0940000Z"
-                    } else {
-                        ohlcvURLString = "https://rest.coinapi.io/v1/ohlcv/BINANCE_SPOT_BTC_USDC/history?period_id=1HRS&time_start=2023-10-21T19:34:53.0940000Z&time_end=2023-10-22T19:34:53.0940000Z"
-                    }
+//                    if baseAsset == "ETH" {
+//                        ohlcvURLString = "https://rest.coinapi.io/v1/ohlcv/BINANCE_SPOT_ETH_USDC/history?period_id=1HRS&time_start=2023-10-21T19:34:53.0940000Z&time_end=2023-10-22T19:34:53.0940000Z"
+//                    } else {
+//                        ohlcvURLString = "https://rest.coinapi.io/v1/ohlcv/BINANCE_SPOT_BTC_USDC/history?period_id=1HRS&time_start=2023-10-21T19:34:53.0940000Z&time_end=2023-10-22T19:34:53.0940000Z"
+//                    }
                     var ohlcvRequest = URLRequest(url: URL(string: ohlcvURLString)!)
                     ohlcvRequest.addValue(self.apiKey, forHTTPHeaderField: "X-CoinAPI-Key")
                     

@@ -40,6 +40,7 @@
 		ED1B689E2AE5903400F597F2 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ED1B689D2AE5903400F597F2 /* DGCharts */; };
 		ED1B68A02AE5903400F597F2 /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = ED1B689F2AE5903400F597F2 /* DGChartsDynamic */; };
 		ED1B68A32AE5991300F597F2 /* OHLCVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68A22AE5991300F597F2 /* OHLCVModel.swift */; };
+		ED7115F82AE726E300733CA8 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7115F72AE726E300733CA8 /* StringExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		ED1B68962AE586A900F597F2 /* ExchangeDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeDetailPresenter.swift; sourceTree = "<group>"; };
 		ED1B689A2AE586BB00F597F2 /* ExchangeDetailFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeDetailFactory.swift; sourceTree = "<group>"; };
 		ED1B68A22AE5991300F597F2 /* OHLCVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OHLCVModel.swift; sourceTree = "<group>"; };
+		ED7115F72AE726E300733CA8 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 				ED1B688B2AE4AFD000F597F2 /* NumberFormatterExtension.swift */,
 				ED1B688D2AE4BCDA00F597F2 /* URLSessionExtension.swift */,
 				ED1B688F2AE4BD1500F597F2 /* UITableViewExtension.swift */,
+				ED7115F72AE726E300733CA8 /* StringExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 		ED1B68912AE5861000F597F2 /* ExchangeDetail */ = {
 			isa = PBXGroup;
 			children = (
+				ED1B68A82AE6EEA000F597F2 /* View */,
 				ED1B68A12AE5990200F597F2 /* Model */,
 				ED1B68922AE5869800F597F2 /* ExchangeDetailViewController.swift */,
 				ED1B68942AE586A100F597F2 /* ExchangeDetailInteractor.swift */,
@@ -259,6 +263,13 @@
 				ED1B68A22AE5991300F597F2 /* OHLCVModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		ED1B68A82AE6EEA000F597F2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,6 +414,7 @@
 				ED1B68342AE479BE00F597F2 /* AppDelegate.swift in Sources */,
 				ED1B68882AE4A16700F597F2 /* ExchangeModel.swift in Sources */,
 				ED1B68772AE48D4200F597F2 /* Colors.swift in Sources */,
+				ED7115F82AE726E300733CA8 /* StringExtension.swift in Sources */,
 				ED1B68822AE4974E00F597F2 /* Spacing.swift in Sources */,
 				ED1B68972AE586A900F597F2 /* ExchangeDetailPresenter.swift in Sources */,
 				ED1B68362AE479BE00F597F2 /* SceneDelegate.swift in Sources */,
