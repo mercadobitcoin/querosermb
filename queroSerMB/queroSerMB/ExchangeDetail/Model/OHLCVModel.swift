@@ -18,7 +18,6 @@ struct OHLCVData: Decodable {
     let priceClose: Double?
     let volumeTraded: Double?
     let tradesCount: Int?
-    let crypto: String?
 
     enum CodingKeys: String, CodingKey {
         case timePeriodStart = "time_period_start"
@@ -31,7 +30,6 @@ struct OHLCVData: Decodable {
         case priceClose = "price_close"
         case volumeTraded = "volume_traded"
         case tradesCount = "trades_count"
-        case crypto = "type"
     }
 }
 

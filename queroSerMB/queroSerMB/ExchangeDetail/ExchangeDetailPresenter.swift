@@ -59,14 +59,13 @@ extension ExchangeDetailPresenter: ExchangeDetailPresenterProtocol {
                 logoImage = image
             }
         }
-        let hourVolume =
-        
+
         viewController?.setupContentLabels(logo: logoImage ?? UIImage(),
                                            name: data.name ?? "",
                                            id: "Exchange ID: \(data.exchangeId ?? "")",
                                            volumeHour: "Volume última hora: \(data.hourVolumeUsd?.currencyFormatter() ?? "")",
-                                           volumeDay: "Volume último dia: \(data.hourVolumeUsd?.currencyFormatter() ?? "")",
-                                           volumeMonth: "Volume última mês: \(data.hourVolumeUsd?.currencyFormatter() ?? "")")
+                                           volumeDay: "Volume último dia: \(data.dailyVolumeUsd?.currencyFormatter() ?? "")",
+                                           volumeMonth: "Volume última mês: \(data.monthVolumeUsd?.currencyFormatter() ?? "")")
     }
 }
 
