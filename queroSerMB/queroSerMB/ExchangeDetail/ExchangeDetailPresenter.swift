@@ -16,11 +16,14 @@ protocol ExchangeDetailPresenterProtocol: AnyObject {
 }
 
 final class ExchangeDetailPresenter {
+    // MARK: - Properties
     weak var viewController: ExchangeDetailViewControllerProtocol?
     
+    // MARK: - Initializers
     init() {}
 }
 
+// MARK: - ExchangeDetailPresenterProtocol Implementation
 extension ExchangeDetailPresenter: ExchangeDetailPresenterProtocol {
     func updateChartData(data: [BarChartDataEntry], priceData: OHLCVData, crypto: CryptoName) {
         let dataEntries = data.map { ChartDataEntry(x: $0.x, y: $0.y, data: $0.data) }
@@ -32,6 +35,7 @@ extension ExchangeDetailPresenter: ExchangeDetailPresenterProtocol {
         
         let price = getPriceFormatted(value: priceData.priceClose, volumeTraded: priceData.volumeTraded)
         let interval = getIntervalFormatted(start: priceData.timePeriodStart, end: priceData.timePeriodEnd)
+        
         viewController?.updateChartData(with: LineChartData(dataSet: dataSet), price: price, crypto: crypto, interval: interval)
     }
     
@@ -43,51 +47,46 @@ extension ExchangeDetailPresenter: ExchangeDetailPresenterProtocol {
     
     func setupLabels(data: ExchangeModel, imageData: ExchangeLogoModel) {
         let defaultLogoImage = UIImage(named: "dollarLogo")?.withTintColor(.blue)
-
         if let urlImage = imageData.url {
             URLSession.shared.fetchImage(from: urlImage) { [weak self] image in
                 let finalLogoImage = image ?? defaultLogoImage ?? UIImage()
-                self?.viewController?.setupContentLabels(logo: finalLogoImage,
-                                                         name: data.name ?? "",
-                                                         id: "Exchange ID:\n\(data.exchangeId ?? "")",
-                                                         volumeHour: "Volume última hora:\n\(data.hourVolumeUsd?.currencyFormatter() ?? "")",
-                                                         volumeDay: "Volume último dia:\n\(data.dailyVolumeUsd?.currencyFormatter() ?? "")",
-                                                         volumeMonth: "Volume última mês:\n\(data.monthVolumeUsd?.currencyFormatter() ?? "")")
+                self?.configureLabelContent(with: finalLogoImage, data: data)
             }
         } else {
-            viewController?.setupContentLabels(logo: defaultLogoImage ?? UIImage(),
-                                               name: data.name ?? "",
-                                               id: "Exchange ID:\n\(data.exchangeId ?? "")",
-                                               volumeHour: "Volume última hora:\n\(data.hourVolumeUsd?.currencyFormatter() ?? "")",
-                                               volumeDay: "Volume último dia:\n\(data.dailyVolumeUsd?.currencyFormatter() ?? "")",
-                                               volumeMonth: "Volume última mês:\n\(data.monthVolumeUsd?.currencyFormatter() ?? "")")
+            configureLabelContent(with: defaultLogoImage ?? UIImage(), data: data)
         }
     }
-
 }
 
+// MARK: - Private Helpers
 private extension ExchangeDetailPresenter {
+    func configureLabelContent(with image: UIImage, data: ExchangeModel) {
+        viewController?.setupContentLabels(logo: image,
+                                           name: data.name ?? "",
+                                           id: "Exchange ID:\n\(data.exchangeId ?? "")",
+                                           volumeHour: "Volume última hora:\n\(data.hourVolumeUsd?.currencyFormatter() ?? "")",
+                                           volumeDay: "Volume último dia:\n\(data.dailyVolumeUsd?.currencyFormatter() ?? "")",
+                                           volumeMonth: "Volume última mês:\n\(data.monthVolumeUsd?.currencyFormatter() ?? "")")
+    }
+    
     func getPriceFormatted(value: Double?, volumeTraded: Double?) -> String {
-        var price = ""
-        if let priceClose = value, let volumeTraded = volumeTraded {
-            let convertPrice = priceClose * volumeTraded
-            price = price.currencyFormatter(value: convertPrice)
-        } else {
-            price = "Valor indisponível"
+        guard let priceClose = value, let volume = volumeTraded else {
+            return "Valor indisponível"
         }
-        return price
+        let convertPrice = priceClose * volume
+        return convertPrice.currencyFormatter()
     }
     
     func getIntervalFormatted(start: Date, end: Date) -> String {
         let timePeriodStart = Date(timeIntervalSinceReferenceDate: start.timeIntervalSinceReferenceDate)
         let timePeriodEnd = Date(timeIntervalSinceReferenceDate: end.timeIntervalSinceReferenceDate)
         
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        let startTimeString = timeFormatter.string(from: timePeriodStart)
+        let endTimeString = timeFormatter.string(from: timePeriodEnd)
+        
         let dateFormatter = DateFormatter()
-        
-        dateFormatter.dateFormat = "HH:mm"
-        let startTimeString = dateFormatter.string(from: timePeriodStart)
-        let endTimeString = dateFormatter.string(from: timePeriodEnd)
-        
         dateFormatter.dateFormat = "dd/MM/yy"
         let dateString = dateFormatter.string(from: timePeriodStart)
         

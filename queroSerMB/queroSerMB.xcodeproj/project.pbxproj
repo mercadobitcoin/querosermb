@@ -250,7 +250,6 @@
 		ED1B68912AE5861000F597F2 /* ExchangeDetail */ = {
 			isa = PBXGroup;
 			children = (
-				ED1B68A82AE6EEA000F597F2 /* View */,
 				ED1B68A12AE5990200F597F2 /* Model */,
 				ED1B68922AE5869800F597F2 /* ExchangeDetailViewController.swift */,
 				ED1B68942AE586A100F597F2 /* ExchangeDetailInteractor.swift */,
@@ -266,13 +265,6 @@
 				ED1B68A22AE5991300F597F2 /* OHLCVModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		ED1B68A82AE6EEA000F597F2 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -8,11 +8,13 @@
 import DGCharts
 import Foundation
 
+// MARK: - CryptoName Enum
 enum CryptoName {
     case btc
     case eth
 }
 
+// MARK: - Protocols
 protocol ExchangeDetailInteractorProtocol: AnyObject {
     func setup()
     func ethGraph()
@@ -20,7 +22,9 @@ protocol ExchangeDetailInteractorProtocol: AnyObject {
     func updatePriceValue(data: OHLCVData)
 }
 
+// MARK: - Main Class
 final class ExchangeDetailInteractor {
+    // MARK: - Private Properties
     private var exchanges: ExchangeModel
     private var exchangesLogos: ExchangeLogoModel
     private var ohlcvEthData: [OHLCVData] = []
@@ -30,9 +34,11 @@ final class ExchangeDetailInteractor {
     private let presenter: ExchangeDetailPresenterProtocol
     private let service: NetworkServiceProtocol
     
+    // MARK: - Initializer
     init(exchanges: ExchangeModel,
          exchangesLogos: ExchangeLogoModel,
-         presenter: ExchangeDetailPresenterProtocol, service: NetworkServiceProtocol) {
+         presenter: ExchangeDetailPresenterProtocol,
+         service: NetworkServiceProtocol) {
         self.exchanges = exchanges
         self.exchangesLogos = exchangesLogos
         self.presenter = presenter
@@ -40,17 +46,18 @@ final class ExchangeDetailInteractor {
     }
 }
 
+// MARK: - ExchangeDetailInteractorProtocol
 extension ExchangeDetailInteractor: ExchangeDetailInteractorProtocol {
     func setup() {
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
-        getETHData() {
+        fetchData(forCrypto: .eth) {
             dispatchGroup.leave()
         }
         
         dispatchGroup.enter()
-        getBTCData() {
+        fetchData(forCrypto: .btc) {
             dispatchGroup.leave()
         }
         
@@ -61,11 +68,11 @@ extension ExchangeDetailInteractor: ExchangeDetailInteractorProtocol {
     }
     
     func ethGraph() {
-        self.presenter.updateChartData(data: self.ethDataEntries, priceData: self.ohlcvEthData[0], crypto: .eth)
+        presenter.updateChartData(data: ethDataEntries, priceData: ohlcvEthData[0], crypto: .eth)
     }
     
     func btcGraph() {
-        self.presenter.updateChartData(data: self.btcDataEntries, priceData: self.ohlcvBtcData[0], crypto: .btc)
+        presenter.updateChartData(data: btcDataEntries, priceData: ohlcvBtcData[0], crypto: .btc)
     }
     
     func updatePriceValue(data: OHLCVData) {
@@ -73,43 +80,45 @@ extension ExchangeDetailInteractor: ExchangeDetailInteractorProtocol {
     }
 }
 
+// MARK: - Private Helpers
 private extension ExchangeDetailInteractor {
-    func getETHData(completion: @escaping () -> Void) {
-        service.getOHLCVForMajorPairs(exchanges.exchangeId ?? "", baseAsset: "ETH") { [weak self] result in
-            defer { completion() }
-            switch result {
-            case .success(let ohlcvData):
-                self?.ohlcvEthData = ohlcvData
-                let sortedData = ohlcvData.sorted(by: { $0.timePeriodStart < $1.timePeriodStart })
-                
-                for (index, data) in sortedData.enumerated() {
-                    if let volume = data.volumeTraded {
-                        self?.ethDataEntries.append(BarChartDataEntry(x: Double(index), y: volume, data: data as AnyObject))
-                    }
-                }
-                
-            case .failure(let error):
-                print("Error fetching OHLCV data: \(error)")
-            }
+    func fetchData(forCrypto crypto: CryptoName, completion: @escaping () -> Void) {
+        guard let exchangeId = exchanges.exchangeId else {
+            print("Exchange ID is missing.")
+            completion()
+            return
         }
-    }
-    
-    func getBTCData(completion: @escaping () -> Void) {
-        service.getOHLCVForMajorPairs(exchanges.exchangeId ?? "", baseAsset: "BTC") { [weak self] result in
+        
+        let asset: String
+        switch crypto {
+        case .eth: asset = "ETH"
+        case .btc: asset = "BTC"
+        }
+        
+        service.getOHLCVForMajorPairs(exchangeId, baseAsset: asset) { [weak self] result in
             defer { completion() }
+            
             switch result {
             case .success(let ohlcvData):
-                self?.ohlcvBtcData = ohlcvData
                 let sortedData = ohlcvData.sorted(by: { $0.timePeriodStart < $1.timePeriodStart })
+                var dataEntries: [BarChartDataEntry] = []
                 
                 for (index, data) in sortedData.enumerated() {
                     if let volume = data.volumeTraded {
-                        self?.btcDataEntries.append(BarChartDataEntry(x: Double(index), y: volume, data: data as AnyObject))
+                        dataEntries.append(BarChartDataEntry(x: Double(index), y: volume, data: data as AnyObject))
                     }
                 }
                 
+                if crypto == .eth {
+                    self?.ohlcvEthData = ohlcvData
+                    self?.ethDataEntries = dataEntries
+                } else {
+                    self?.ohlcvBtcData = ohlcvData
+                    self?.btcDataEntries = dataEntries
+                }
+                
             case .failure(let error):
-                print("Error fetching OHLCV data: \(error)")
+                print("Error fetching OHLCV data for \(asset): \(error)")
             }
         }
     }

@@ -7,26 +7,26 @@
 import UIKit
 
 class ExchangeCellViewModel {
-    var task: URLSessionDataTask?
-    var onLogoImageUpdated: ((UIImage?) -> Void)?
+    
+    // MARK: - Properties
+    private var task: URLSessionDataTask?
+    static private var imageCache: [URL: UIImage] = [:]
+    
     let name: String
     let id: String
     let dailyVolumeUsdText: String
     var exchangeIconURL: URL?
-    var exchangeIconImage: UIImage? = UIImage(named: "dollarLogo")?.withTintColor(.blue)
-    var hasAttemptedToDownloadImage: Bool = false
-    
-    var shouldDownloadImage: Bool = false {
+    var exchangeIconImage: UIImage? {
         didSet {
-            if shouldDownloadImage, let logoUrl = exchangeIconURL {
-                downloadImage(from: logoUrl)
-            }
+            onLogoImageUpdated?(exchangeIconImage)
         }
     }
-
+    var hasAttemptedToDownloadImage: Bool = false
+    var onLogoImageUpdated: ((UIImage?) -> Void)?
+    
+    // MARK: - Initializers
     init(from model: ExchangeModel, logoUrl: URL?) {
         self.name = model.name ?? "Desconhecido"
-        self.exchangeIconURL = logoUrl
         self.id = "ID: \(model.exchangeId ?? "Desconhecido")"
         
         if let volume = model.dailyVolumeUsd {
@@ -34,26 +34,35 @@ class ExchangeCellViewModel {
         } else {
             self.dailyVolumeUsdText = "$0"
         }
-
+        
         self.exchangeIconURL = logoUrl
+        self.exchangeIconImage = ExchangeCellViewModel.cachedImage(for: logoUrl) ?? UIImage(named: "dollarLogo")?.withTintColor(.blue)
     }
     
-    private func downloadImage(from url: URL) {
-        URLSession.shared.fetchImage(from: url) { [weak self] image in
-            self?.exchangeIconImage = image
-            self?.onLogoImageUpdated?(image)
-        }
-    }
-    
+    // MARK: - Image Handling
     func fetchImage(from logoUrl: URL?) {
         guard let logoUrl = logoUrl else { return }
+        
+        if let cachedImage = ExchangeCellViewModel.imageCache[logoUrl] {
+            self.exchangeIconImage = cachedImage
+            return
+        }
+        
         task = URLSession.shared.fetchImage(from: logoUrl) { [weak self] image in
+            if let image = image {
+                ExchangeCellViewModel.imageCache[logoUrl] = image
+            }
             self?.exchangeIconImage = image
-            self?.onLogoImageUpdated?(image)
         }
     }
     
     func cancelImageDownload() {
         task?.cancel()
+    }
+    
+    // MARK: - Private Helpers
+    static private func cachedImage(for url: URL?) -> UIImage? {
+        guard let url = url else { return nil }
+        return imageCache[url]
     }
 }

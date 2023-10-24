@@ -7,11 +7,15 @@
 
 import UIKit
 
+// MARK: - Protocol
 protocol ExchangesTableViewDelegate: AnyObject {
     func didTapExchange(at indexPath: IndexPath)
 }
 
-class ExchangesTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
+// MARK: - Main Class
+class ExchangesTableView: UITableView {
+    
+    // MARK: - Properties
     weak var exchangesDelegate: ExchangesTableViewDelegate?
     var exchangeList: [ExchangeCellViewModel] = [] {
         didSet {
@@ -19,28 +23,35 @@ class ExchangesTableView: UITableView, UITableViewDataSource, UITableViewDelegat
         }
     }
     
-    init() {
-        super.init(frame: .zero, style: .plain)
+    // MARK: - Initializers
+    override init(frame: CGRect, style: UITableView.Style) {
+        super.init(frame: frame, style: style)
         setupTableView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    // MARK: - Setup
     private func setupTableView() {
         dataSource = self
         delegate = self
-        register(ExchangeListCell.self, forCellReuseIdentifier: "ExchangeListCell")
+        register(ExchangeListCell.self, forCellReuseIdentifier: ExchangeListCell.identifier)
+        configureTableViewAppearance()
+    }
+    
+    private func configureTableViewAppearance() {
         rowHeight = UITableView.automaticDimension
         estimatedRowHeight = 100
         backgroundColor = Colors.offBlack.color
         separatorStyle = .none
         translatesAutoresizingMaskIntoConstraints = false
     }
-    
-    // MARK: - UITableViewDataSource methods
-    
+}
+
+// MARK: - UITableViewDataSource
+extension ExchangesTableView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return exchangeList.count
     }
@@ -50,14 +61,18 @@ class ExchangesTableView: UITableView, UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = dequeueReusableCell(withIdentifier: "ExchangeListCell", for: indexPath) as! ExchangeListCell
+        guard let cell = dequeueReusableCell(withIdentifier: ExchangeListCell.identifier, for: indexPath) as? ExchangeListCell else {
+            return UITableViewCell()
+        }
         let viewModel = exchangeList[indexPath.section]
+        cell.viewModel = viewModel
         cell.configure(with: viewModel)
         return cell
     }
-    
-    // MARK: - UITableViewDelegate methods
-    
+}
+
+// MARK: - UITableViewDelegate
+extension ExchangesTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 0.0 : Spacing.space0
     }
@@ -74,4 +89,9 @@ class ExchangesTableView: UITableView, UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         exchangesDelegate?.didTapExchange(at: indexPath)
     }
+}
+
+// MARK: - ExchangeListCell
+extension ExchangeListCell {
+    static let identifier = "ExchangeListCell"
 }
