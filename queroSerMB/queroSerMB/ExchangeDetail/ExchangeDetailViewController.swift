@@ -10,8 +10,8 @@ import UIKit
 import DGCharts
 
 protocol ExchangeDetailViewControllerProtocol: AnyObject {
-    func updateChartData(with data: LineChartData, price: String, crypto: CryptoName)
-    func updatePriceValue(text: String)
+    func updateChartData(with data: LineChartData, price: String, crypto: CryptoName, interval: String)
+    func updatePriceValue(text: String, interval: String)
     func setupContentLabels(logo: UIImage, name: String, id: String, volumeHour: String, volumeDay: String, volumeMonth: String)
 }
 
@@ -24,7 +24,6 @@ class ExchangeDetailViewController: UIViewController {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.text = "Valor transacionado:"
-        label.textAlignment = .center
         return label
     }()
     
@@ -32,8 +31,53 @@ class ExchangeDetailViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = Colors.white.color
-        label.textAlignment = .center
         return label
+    }()
+    
+    private lazy var priceStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fillEqually
+        stackView.spacing = 4
+        return stackView
+    }()
+    
+    private lazy var legendIntervalLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = Colors.white.color
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.text = "Intervalo:"
+        return label
+    }()
+    
+    private lazy var intervalLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = Colors.white.color
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        return label
+    }()
+    
+    private lazy var intervalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 4
+        return stackView
+    }()
+    
+    private lazy var groupPriceAndIntervalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        return stackView
     }()
 
     private lazy var btcButton: UIButton = {
@@ -100,6 +144,8 @@ class ExchangeDetailViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = Colors.white.color
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -108,6 +154,8 @@ class ExchangeDetailViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = Colors.white.color
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -116,6 +164,8 @@ class ExchangeDetailViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = Colors.white.color
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -124,8 +174,32 @@ class ExchangeDetailViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = Colors.white.color
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.isScrollEnabled = true
+        scrollView.isUserInteractionEnabled = true
+        return scrollView
+    }()
+    
+    private lazy var exchangeVolumeStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.distribution = .fillEqually
+        stackView.spacing = Spacing.space1
+        return stackView
+    }()
+
+    private lazy var contentView: UIView = {
+        let view = UIView()
+    //    view.isUserInteractionEnabled = true
+        return view
     }()
     
     override func viewDidLoad() {
@@ -158,37 +232,61 @@ extension ExchangeDetailViewController {
 
 extension ExchangeDetailViewController: ViewSetup {
     func setupHierarchy() {
-        buttonStackView.addArrangedSubview(btcButton)
-        buttonStackView.addArrangedSubview(ethButton)
-        exchangeStackView.addArrangedSubview(exchangeiconImageView)
-        exchangeStackView.addArrangedSubview(exchangeNameLabel)
-        view.addSubviews(buttonStackView,
-                         legendPriceLabel,
-                         priceLabel,
-                         chartView,
-                         legendLabel,
-                         exchangeStackView,
-                         exchangeIdLabel,
-                         exchangeVolumeTransactionHourLabel,
-                         exchangeVolumeTransactionDayLabel,
-                         exchangeVolumeTransactionMonthLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        buttonStackView.addArrangedSubviews(btcButton,
+                                            ethButton)
+        exchangeStackView.addArrangedSubviews(exchangeiconImageView,
+                                              exchangeNameLabel)
+        priceStackView.addArrangedSubviews(legendPriceLabel,
+                                           priceLabel)
+        intervalStackView.addArrangedSubviews(legendIntervalLabel,
+                                              intervalLabel)
+        groupPriceAndIntervalStackView.addArrangedSubviews(priceStackView,
+                                                           intervalStackView)
+        
+        exchangeVolumeStackView.addArrangedSubviews(exchangeIdLabel,
+                                                    exchangeVolumeTransactionHourLabel,
+                                                    exchangeVolumeTransactionDayLabel,
+                                                    exchangeVolumeTransactionMonthLabel)
+        contentView.addSubviews(buttonStackView,
+                                groupPriceAndIntervalStackView,
+                                chartView,
+                                legendLabel,
+                                exchangeStackView,
+                                exchangeVolumeStackView)
     }
     
     func setupConstraints() {
         chartView.translatesAutoresizingMaskIntoConstraints = false
-        legendPriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        groupPriceAndIntervalStackView.translatesAutoresizingMaskIntoConstraints = false
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         legendLabel.translatesAutoresizingMaskIntoConstraints = false
         exchangeStackView.translatesAutoresizingMaskIntoConstraints = false
-        exchangeIdLabel.translatesAutoresizingMaskIntoConstraints = false
-        exchangeVolumeTransactionHourLabel.translatesAutoresizingMaskIntoConstraints = false
-        exchangeVolumeTransactionDayLabel.translatesAutoresizingMaskIntoConstraints = false
-        exchangeVolumeTransactionMonthLabel.translatesAutoresizingMaskIntoConstraints = false
+        exchangeVolumeStackView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            exchangeStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            exchangeStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            exchangeStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            exchangeStackView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             exchangeStackView.heightAnchor.constraint(equalToConstant: 48),
             exchangeiconImageView.heightAnchor.constraint(equalToConstant: 48),
             exchangeiconImageView.widthAnchor.constraint(equalToConstant: 48),
@@ -196,60 +294,48 @@ extension ExchangeDetailViewController: ViewSetup {
         
         NSLayoutConstraint.activate([
             buttonStackView.topAnchor.constraint(equalTo: exchangeStackView.bottomAnchor, constant: Spacing.space4),
-            buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space5),
-            buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Spacing.space5),
+            buttonStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Spacing.space5),
+            buttonStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Spacing.space5),
             buttonStackView.heightAnchor.constraint(equalToConstant: 34),
         ])
         
         NSLayoutConstraint.activate([
-            legendPriceLabel.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: Spacing.space4),
-            legendPriceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space5),
-            legendPriceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Spacing.space5),
-            legendPriceLabel.heightAnchor.constraint(equalToConstant: 16),
+            groupPriceAndIntervalStackView.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: Spacing.space4),
+            groupPriceAndIntervalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Spacing.space5),
+            intervalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Spacing.space5),
+            intervalLabel.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         NSLayoutConstraint.activate([
-            priceLabel.topAnchor.constraint(equalTo: legendPriceLabel.bottomAnchor, constant: Spacing.space1),
-            priceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space5),
-            priceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Spacing.space5),
-            priceLabel.heightAnchor.constraint(equalToConstant: 16),
-        ])
-        
-        NSLayoutConstraint.activate([
-            chartView.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: Spacing.space2),
-            chartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space5),
-            chartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Spacing.space5),
+            chartView.topAnchor.constraint(equalTo: intervalStackView.bottomAnchor, constant: Spacing.space2),
+            chartView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Spacing.space5),
+            chartView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Spacing.space5),
             chartView.heightAnchor.constraint(equalToConstant: 250)
         ])
         
         NSLayoutConstraint.activate([
             legendLabel.topAnchor.constraint(equalTo: chartView.bottomAnchor, constant: Spacing.space2),
-            legendLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space5),
-            legendLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Spacing.space5),
+            legendLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Spacing.space5),
+            legendLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Spacing.space5),
         ])
         
         NSLayoutConstraint.activate([
-            exchangeIdLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space5),
-            exchangeIdLabel.topAnchor.constraint(equalTo: legendLabel.bottomAnchor, constant: Spacing.space2)
-        ])
-        
-        NSLayoutConstraint.activate([
-            exchangeVolumeTransactionHourLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space5),
-            exchangeVolumeTransactionHourLabel.topAnchor.constraint(equalTo: exchangeIdLabel.bottomAnchor, constant: Spacing.space2)
-        ])
-        
-        NSLayoutConstraint.activate([
-            exchangeVolumeTransactionDayLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space5),
-            exchangeVolumeTransactionDayLabel.topAnchor.constraint(equalTo: exchangeVolumeTransactionHourLabel.bottomAnchor, constant: Spacing.space2)
-        ])
-        
-        NSLayoutConstraint.activate([
-            exchangeVolumeTransactionMonthLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space5),
-            exchangeVolumeTransactionMonthLabel.topAnchor.constraint(equalTo: exchangeVolumeTransactionDayLabel.bottomAnchor, constant: Spacing.space2)
+            exchangeVolumeStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Spacing.space5),
+            exchangeVolumeStackView.topAnchor.constraint(equalTo: legendLabel.bottomAnchor, constant: Spacing.space2),
+            exchangeVolumeTransactionMonthLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Spacing.space5)
         ])
     }
     
     func setupStyles() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = .clear
+        appearance.shadowColor = nil
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.tintColor = Colors.white.color
+        
         view.backgroundColor = Colors.offBlack.color
         btcButton.backgroundColor = Colors.offGray.color
         setupChart()
@@ -281,30 +367,30 @@ extension ExchangeDetailViewController: ViewSetup {
     }
 }
 
-extension ExchangeDetailViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
-    }
-}
-
 extension ExchangeDetailViewController: ExchangeDetailViewControllerProtocol {
-    func updateChartData(with data: LineChartData, price: String, crypto: CryptoName) {
+    func updateChartData(with data: LineChartData, price: String, crypto: CryptoName, interval: String) {
         chartView.data = data
+        
+        chartView.animate(xAxisDuration: 1.5, yAxisDuration: 0.0, easingOption: .easeInOutQuart)
         chartView.notifyDataSetChanged()
         priceLabel.text = price
+        intervalLabel.text = interval
         
-        switch crypto {
-        case .btc:
-            btcButton.backgroundColor = Colors.offGray.color
-            ethButton.backgroundColor = .clear
-        case .eth:
-            ethButton.backgroundColor = Colors.offGray.color
-            btcButton.backgroundColor = .clear
+        UIView.animate(withDuration: 0.5) {
+            switch crypto {
+            case .btc:
+                self.btcButton.backgroundColor = Colors.offGray.color
+                self.ethButton.backgroundColor = .clear
+            case .eth:
+                self.ethButton.backgroundColor = Colors.offGray.color
+                self.btcButton.backgroundColor = .clear
+            }
         }
     }
     
-    func updatePriceValue(text: String) {
+    func updatePriceValue(text: String, interval: String) {
         priceLabel.text = text
+        intervalLabel.text = interval
     }
     
     func setupContentLabels(logo: UIImage, name: String, id: String, volumeHour: String, volumeDay: String, volumeMonth: String) {

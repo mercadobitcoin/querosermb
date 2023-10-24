@@ -68,6 +68,9 @@ extension ExchangesListViewController: ViewSetup {
     
     func setupStyles() {
         view.backgroundColor = Colors.offBlack.color
+        let backItem = UIBarButtonItem()
+        backItem.title = "Voltar"
+        navigationItem.backBarButtonItem = backItem
     }
 }
 extension ExchangesListViewController: UITextFieldDelegate {

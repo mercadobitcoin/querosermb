@@ -30,58 +30,68 @@ extension ExchangeDetailPresenter: ExchangeDetailPresenterProtocol {
         dataSet.drawCirclesEnabled = false
         dataSet.drawValuesEnabled = false
         
-        var price = ""
-        if let priceClose = priceData.priceClose, let volumeTraded = priceData.volumeTraded {
-            let convertPrice = priceClose * volumeTraded
-            price = price.currencyFormatter(value: convertPrice)
-        } else {
-            price = "Valor indisponível"
-        }
-        
-        viewController?.updateChartData(with: LineChartData(dataSet: dataSet), price: price, crypto: crypto)
+        let price = getPriceFormatted(value: priceData.priceClose, volumeTraded: priceData.volumeTraded)
+        let interval = getIntervalFormatted(start: priceData.timePeriodStart, end: priceData.timePeriodEnd)
+        viewController?.updateChartData(with: LineChartData(dataSet: dataSet), price: price, crypto: crypto, interval: interval)
     }
     
     func updateValue(data: OHLCVData) {
+        let price = getPriceFormatted(value: data.priceClose, volumeTraded: data.volumeTraded)
+        let interval = getIntervalFormatted(start: data.timePeriodStart, end: data.timePeriodEnd)
+        viewController?.updatePriceValue(text: price, interval: interval)
+    }
+    
+    func setupLabels(data: ExchangeModel, imageData: ExchangeLogoModel) {
+        let defaultLogoImage = UIImage(named: "dollarLogo")?.withTintColor(.blue)
+
+        if let urlImage = imageData.url {
+            URLSession.shared.fetchImage(from: urlImage) { [weak self] image in
+                let finalLogoImage = image ?? defaultLogoImage ?? UIImage()
+                self?.viewController?.setupContentLabels(logo: finalLogoImage,
+                                                         name: data.name ?? "",
+                                                         id: "Exchange ID:\n\(data.exchangeId ?? "")",
+                                                         volumeHour: "Volume última hora:\n\(data.hourVolumeUsd?.currencyFormatter() ?? "")",
+                                                         volumeDay: "Volume último dia:\n\(data.dailyVolumeUsd?.currencyFormatter() ?? "")",
+                                                         volumeMonth: "Volume última mês:\n\(data.monthVolumeUsd?.currencyFormatter() ?? "")")
+            }
+        } else {
+            viewController?.setupContentLabels(logo: defaultLogoImage ?? UIImage(),
+                                               name: data.name ?? "",
+                                               id: "Exchange ID:\n\(data.exchangeId ?? "")",
+                                               volumeHour: "Volume última hora:\n\(data.hourVolumeUsd?.currencyFormatter() ?? "")",
+                                               volumeDay: "Volume último dia:\n\(data.dailyVolumeUsd?.currencyFormatter() ?? "")",
+                                               volumeMonth: "Volume última mês:\n\(data.monthVolumeUsd?.currencyFormatter() ?? "")")
+        }
+    }
+
+}
+
+private extension ExchangeDetailPresenter {
+    func getPriceFormatted(value: Double?, volumeTraded: Double?) -> String {
         var price = ""
-        if let priceClose = data.priceClose, let volumeTraded = data.volumeTraded {
+        if let priceClose = value, let volumeTraded = volumeTraded {
             let convertPrice = priceClose * volumeTraded
             price = price.currencyFormatter(value: convertPrice)
         } else {
             price = "Valor indisponível"
         }
-        viewController?.updatePriceValue(text: price)
+        return price
     }
     
-    func setupLabels(data: ExchangeModel, imageData: ExchangeLogoModel) {
-        var logoImage = UIImage(named: "dollarLogo")?.withTintColor(.blue)
-        if let urlImage = imageData.url {
-            URLSession.shared.fetchImage(from: urlImage) { [weak self] image in
-                logoImage = image
-            }
-        }
-
-        viewController?.setupContentLabels(logo: logoImage ?? UIImage(),
-                                           name: data.name ?? "",
-                                           id: "Exchange ID: \(data.exchangeId ?? "")",
-                                           volumeHour: "Volume última hora: \(data.hourVolumeUsd?.currencyFormatter() ?? "")",
-                                           volumeDay: "Volume último dia: \(data.dailyVolumeUsd?.currencyFormatter() ?? "")",
-                                           volumeMonth: "Volume última mês: \(data.monthVolumeUsd?.currencyFormatter() ?? "")")
-    }
-}
-
-extension Double {
-    func currencyFormatter() -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencySymbol = "$"
-        formatter.maximumFractionDigits = 2
-        formatter.minimumFractionDigits = 2
-
-        if let formattedString = formatter.string(from: NSNumber(value: self)) {
-            return formattedString
-        } else {
-            return ""
-        }
+    func getIntervalFormatted(start: Date, end: Date) -> String {
+        let timePeriodStart = Date(timeIntervalSinceReferenceDate: start.timeIntervalSinceReferenceDate)
+        let timePeriodEnd = Date(timeIntervalSinceReferenceDate: end.timeIntervalSinceReferenceDate)
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "HH:mm"
+        let startTimeString = dateFormatter.string(from: timePeriodStart)
+        let endTimeString = dateFormatter.string(from: timePeriodEnd)
+        
+        dateFormatter.dateFormat = "dd/MM/yy"
+        let dateString = dateFormatter.string(from: timePeriodStart)
+        
+        return "\(startTimeString) as \(endTimeString)\ndo dia \(dateString)"
     }
 }
 

@@ -41,6 +41,7 @@
 		ED1B68A02AE5903400F597F2 /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = ED1B689F2AE5903400F597F2 /* DGChartsDynamic */; };
 		ED1B68A32AE5991300F597F2 /* OHLCVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68A22AE5991300F597F2 /* OHLCVModel.swift */; };
 		ED7115F82AE726E300733CA8 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7115F72AE726E300733CA8 /* StringExtension.swift */; };
+		EDED44132AE865AE00A0F6DE /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDED44122AE865AE00A0F6DE /* DoubleExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		ED1B689A2AE586BB00F597F2 /* ExchangeDetailFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeDetailFactory.swift; sourceTree = "<group>"; };
 		ED1B68A22AE5991300F597F2 /* OHLCVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OHLCVModel.swift; sourceTree = "<group>"; };
 		ED7115F72AE726E300733CA8 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		EDED44122AE865AE00A0F6DE /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 				ED1B688D2AE4BCDA00F597F2 /* URLSessionExtension.swift */,
 				ED1B688F2AE4BD1500F597F2 /* UITableViewExtension.swift */,
 				ED7115F72AE726E300733CA8 /* StringExtension.swift */,
+				EDED44122AE865AE00A0F6DE /* DoubleExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				ED1B68A32AE5991300F597F2 /* OHLCVModel.swift in Sources */,
 				ED1B68902AE4BD1500F597F2 /* UITableViewExtension.swift in Sources */,
 				ED1B687A2AE48F5F00F597F2 /* ExchangeSearchBar.swift in Sources */,
+				EDED44132AE865AE00A0F6DE /* DoubleExtension.swift in Sources */,
 				ED1B68802AE4955C00F597F2 /* UIViewExtension.swift in Sources */,
 				ED1B68692AE47D4E00F597F2 /* ExchangesListPresenter.swift in Sources */,
 				ED1B68952AE586A100F597F2 /* ExchangeDetailInteractor.swift in Sources */,

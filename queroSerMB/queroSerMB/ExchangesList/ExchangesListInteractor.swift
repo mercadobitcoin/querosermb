@@ -77,6 +77,17 @@ extension ExchangesListInteractor: ExchangesListInteractorProtocol {
     }
     
     func showDetails(indexPath: IndexPath) {
-        presenter.showDetails(exchanges: self.exchanges[indexPath.section], exchangesLogo: self.exchangesLogos[indexPath.section])
+        let exchange = self.exchanges[indexPath.section]
+        guard let exchangeId = exchange.exchangeId else {
+            print("Exchange ID not found for given indexPath")
+            return
+        }
+        
+        if let logoModel = self.exchangesLogos.first(where: { $0.exchangeId == exchangeId }) {
+            presenter.showDetails(exchanges: exchange, exchangesLogo: logoModel)
+        } else {
+            presenter.showDetails(exchanges: exchange, exchangesLogo: ExchangeLogoModel(exchangeId: exchange.exchangeId, url: nil))
+        }
     }
+
 }
