@@ -62,9 +62,14 @@ extension ExchangeDetailInteractor: ExchangeDetailInteractorProtocol {
         }
         
         dispatchGroup.notify(queue: .main) {
-            self.presenter.updateChartData(data: self.btcDataEntries, priceData: self.ohlcvBtcData[0], crypto: .btc)
+            if let firstBtcData = self.ohlcvBtcData.first {
+                self.presenter.updateChartData(data: self.btcDataEntries, priceData: firstBtcData, crypto: .btc)
+            } else {
+                self.presenter.showError()
+            }
             self.presenter.setupLabels(data: self.exchanges, imageData: self.exchangesLogos)
         }
+
     }
     
     func ethGraph() {

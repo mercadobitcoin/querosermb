@@ -79,7 +79,7 @@ private extension ExchangesListInteractor {
                 self?.exchanges = fetchedExchanges
                 completion()
             case .failure(let error):
-                print(error.localizedDescription)
+                self?.presenter.showError()
             }
         }
     }

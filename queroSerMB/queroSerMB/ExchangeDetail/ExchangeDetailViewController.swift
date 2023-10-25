@@ -13,6 +13,7 @@ protocol ExchangeDetailViewControllerProtocol: AnyObject {
     func updateChartData(with data: LineChartData, price: String, crypto: CryptoName, interval: String)
     func updatePriceValue(text: String, interval: String)
     func setupContentLabels(logo: UIImage, name: String, id: String, volumeHour: String, volumeDay: String, volumeMonth: String)
+    func showError()
 }
 
 // MARK: - Main Class
@@ -143,6 +144,39 @@ class ExchangeDetailViewController: UIViewController {
         return activity
     }()
     
+    private lazy var exchangeErrorFetchListLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 32)
+        label.textColor = Colors.white.color
+        label.text = "Não foi possível carregar as informações"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var retryFetchListButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Tentar novamente", for: .normal)
+        button.setTitleColor(Colors.offGray.color, for: .normal)
+        button.backgroundColor = Colors.white.color
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(retryFetchList), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var errorStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fillProportionally
+        stackView.spacing = Spacing.space2
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isHidden = true
+        return stackView
+    }()
+    
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -216,12 +250,18 @@ extension ExchangeDetailViewController {
     @objc func didTapETH() {
         interactor.ethGraph()
     }
+    
+    @objc func retryFetchList() {
+        interactor.setup()
+    }
 }
 
 // MARK: - ViewSetup
 extension ExchangeDetailViewController: ViewSetup {
     func setupHierarchy() {
-        view.addSubviews(activityIndicator, scrollView)
+        errorStackView.addArrangedSubviews(exchangeErrorFetchListLabel,
+                                           retryFetchListButton)
+        view.addSubviews(activityIndicator, errorStackView, scrollView)
         scrollView.addSubview(contentView)
         buttonStackView.addArrangedSubviews(btcButton,
                                             ethButton)
@@ -316,6 +356,13 @@ extension ExchangeDetailViewController: ViewSetup {
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+        
+        NSLayoutConstraint.activate([
+            errorStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            errorStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            errorStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space3),
+            errorStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Spacing.space3)
+        ])
     }
     
     func setupStyles() {
@@ -337,6 +384,7 @@ extension ExchangeDetailViewController: ViewSetup {
     
     func stopLoading() {
         scrollView.isHidden = false
+        errorStackView.isHidden = true
         activityIndicator.stopAnimating()
     }
     
@@ -402,6 +450,11 @@ extension ExchangeDetailViewController: ExchangeDetailViewControllerProtocol {
         exchangeVolumeTransactionHourLabel.text = volumeHour
         exchangeVolumeTransactionDayLabel.text = volumeDay
         exchangeVolumeTransactionMonthLabel.text = volumeMonth
+    }
+    
+    func showError() {
+        activityIndicator.stopAnimating()
+        errorStackView.isHidden = false
     }
 }
 

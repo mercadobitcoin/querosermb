@@ -13,6 +13,7 @@ protocol ExchangeDetailPresenterProtocol: AnyObject {
     func updateChartData(data: [BarChartDataEntry], priceData: OHLCVData, crypto: CryptoName)
     func updateValue(data: OHLCVData)
     func setupLabels(data: ExchangeModel, imageData: ExchangeLogoModel)
+    func showError()
 }
 
 final class ExchangeDetailPresenter {
@@ -55,6 +56,10 @@ extension ExchangeDetailPresenter: ExchangeDetailPresenterProtocol {
         } else {
             configureLabelContent(with: defaultLogoImage ?? UIImage(), data: data)
         }
+    }
+    
+    func showError() {
+        viewController?.showError()
     }
 }
 

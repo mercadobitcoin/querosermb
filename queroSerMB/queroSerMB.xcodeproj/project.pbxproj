@@ -43,11 +43,6 @@
 		EDE9530D2AE9514300355911 /* ExchangesListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE9530C2AE9514300355911 /* ExchangesListInteractorTests.swift */; };
 		EDE9530F2AE9525700355911 /* ExchangesListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE9530E2AE9525700355911 /* ExchangesListPresenterTests.swift */; };
 		EDE953112AE952A100355911 /* ExchangesListCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE953102AE952A100355911 /* ExchangesListCoordinatorTests.swift */; };
-		EDE953142AE9601200355911 /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = EDE953132AE9601200355911 /* InlineSnapshotTesting */; };
-		EDE953162AE9601200355911 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = EDE953152AE9601200355911 /* SnapshotTesting */; };
-		EDE953182AE9605900355911 /* ExchangesListViewControllerSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE953172AE9605900355911 /* ExchangesListViewControllerSnapshotTests.swift */; };
-		EDE9531B2AE961A200355911 /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = EDE9531A2AE961A200355911 /* InlineSnapshotTesting */; };
-		EDE9531D2AE961A200355911 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = EDE9531C2AE961A200355911 /* SnapshotTesting */; };
 		EDED44132AE865AE00A0F6DE /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDED44122AE865AE00A0F6DE /* DoubleExtension.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,7 +102,6 @@
 		EDE9530C2AE9514300355911 /* ExchangesListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangesListInteractorTests.swift; sourceTree = "<group>"; };
 		EDE9530E2AE9525700355911 /* ExchangesListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangesListPresenterTests.swift; sourceTree = "<group>"; };
 		EDE953102AE952A100355911 /* ExchangesListCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangesListCoordinatorTests.swift; sourceTree = "<group>"; };
-		EDE953172AE9605900355911 /* ExchangesListViewControllerSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangesListViewControllerSnapshotTests.swift; sourceTree = "<group>"; };
 		EDED44122AE865AE00A0F6DE /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,8 +111,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED1B68A02AE5903400F597F2 /* DGChartsDynamic in Frameworks */,
-				EDE953162AE9601200355911 /* SnapshotTesting in Frameworks */,
-				EDE953142AE9601200355911 /* InlineSnapshotTesting in Frameworks */,
 				ED1B689E2AE5903400F597F2 /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,8 +126,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDE9531B2AE961A200355911 /* InlineSnapshotTesting in Frameworks */,
-				EDE9531D2AE961A200355911 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,7 +179,6 @@
 		ED1B68532AE479BF00F597F2 /* queroSerMBUITests */ = {
 			isa = PBXGroup;
 			children = (
-				EDE953172AE9605900355911 /* ExchangesListViewControllerSnapshotTests.swift */,
 			);
 			path = queroSerMBUITests;
 			sourceTree = "<group>";
@@ -311,8 +300,6 @@
 			packageProductDependencies = (
 				ED1B689D2AE5903400F597F2 /* DGCharts */,
 				ED1B689F2AE5903400F597F2 /* DGChartsDynamic */,
-				EDE953132AE9601200355911 /* InlineSnapshotTesting */,
-				EDE953152AE9601200355911 /* SnapshotTesting */,
 			);
 			productName = queroSerMB;
 			productReference = ED1B68302AE479BE00F597F2 /* queroSerMB.app */;
@@ -351,8 +338,6 @@
 			);
 			name = queroSerMBUITests;
 			packageProductDependencies = (
-				EDE9531A2AE961A200355911 /* InlineSnapshotTesting */,
-				EDE9531C2AE961A200355911 /* SnapshotTesting */,
 			);
 			productName = queroSerMBUITests;
 			productReference = ED1B68502AE479BF00F597F2 /* queroSerMBUITests.xctest */;
@@ -392,7 +377,6 @@
 			mainGroup = ED1B68272AE479BE00F597F2;
 			packageReferences = (
 				ED1B689C2AE58F9200F597F2 /* XCRemoteSwiftPackageReference "Charts" */,
-				EDE953122AE9601200355911 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = ED1B68312AE479BE00F597F2 /* Products */;
 			projectDirPath = "";
@@ -483,7 +467,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDE953182AE9605900355911 /* ExchangesListViewControllerSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -815,14 +798,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		EDE953122AE9601200355911 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.14.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -835,26 +810,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ED1B689C2AE58F9200F597F2 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGChartsDynamic;
-		};
-		EDE953132AE9601200355911 /* InlineSnapshotTesting */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EDE953122AE9601200355911 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
-			productName = InlineSnapshotTesting;
-		};
-		EDE953152AE9601200355911 /* SnapshotTesting */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EDE953122AE9601200355911 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
-			productName = SnapshotTesting;
-		};
-		EDE9531A2AE961A200355911 /* InlineSnapshotTesting */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EDE953122AE9601200355911 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
-			productName = InlineSnapshotTesting;
-		};
-		EDE9531C2AE961A200355911 /* SnapshotTesting */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EDE953122AE9601200355911 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
-			productName = SnapshotTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

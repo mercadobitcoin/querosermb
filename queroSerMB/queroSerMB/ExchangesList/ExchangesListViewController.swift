@@ -10,6 +10,7 @@ import UIKit
 // MARK: - Protocols
 protocol ExchangesListViewControllerProtocol: AnyObject {
     func displayList(exchangeList: [ExchangeCellViewModel])
+    func displayError()
 }
 
 // MARK: - Main Class
@@ -26,6 +27,39 @@ class ExchangesListViewController: UIViewController {
         let table = ExchangesTableView()
         table.exchangesDelegate = self
         return table
+    }()
+    
+    private lazy var exchangeErrorFetchListLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 32)
+        label.textColor = Colors.white.color
+        label.text = "Não foi possível carregar as informações"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var retryFetchListButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Tentar novamente", for: .normal)
+        button.setTitleColor(Colors.offGray.color, for: .normal)
+        button.backgroundColor = Colors.white.color
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(retryFetchList), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var errorStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fillProportionally
+        stackView.spacing = Spacing.space2
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.isHidden = true
+        return stackView
     }()
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
@@ -64,12 +98,18 @@ class ExchangesListViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+    @objc func retryFetchList() {
+        interactor.callServices()
+    }
 }
 
 // MARK: - ViewSetup
 extension ExchangesListViewController: ViewSetup {
     func setupHierarchy() {
-        view.addSubviews(activityIndicator, searchBar, exchangeTable)
+        errorStackView.addArrangedSubviews(exchangeErrorFetchListLabel,
+                                           retryFetchListButton)
+        view.addSubviews(activityIndicator, errorStackView, searchBar, exchangeTable)
     }
     
     func setupConstraints() {
@@ -91,6 +131,13 @@ extension ExchangesListViewController: ViewSetup {
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+        
+        NSLayoutConstraint.activate([
+            errorStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            errorStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            errorStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space3),
+            errorStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Spacing.space3)
+        ])
     }
     
     func setupStyles() {
@@ -106,8 +153,9 @@ extension ExchangesListViewController: ViewSetup {
     }
     
     func stopLoading() {
-        exchangeTable.isHidden = false
         activityIndicator.stopAnimating()
+        exchangeTable.isHidden = false
+        errorStackView.isHidden = true
     }
 }
 
@@ -140,5 +188,10 @@ extension ExchangesListViewController: ExchangesListViewControllerProtocol {
         exchangeTable.exchangeList = exchangeList
         exchangeTable.reloadData()
         stopLoading()
+    }
+    
+    func displayError() {
+        activityIndicator.stopAnimating()
+        errorStackView.isHidden = false
     }
 }

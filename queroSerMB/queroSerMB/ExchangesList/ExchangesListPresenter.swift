@@ -11,6 +11,7 @@ import Foundation
 protocol ExchangesListPresenterProtocol: AnyObject {
     func showList(exchanges: [ExchangeModel], exchangesLogo: [ExchangeLogoModel])
     func showDetails(exchanges: ExchangeModel, exchangesLogo: ExchangeLogoModel)
+    func showError()
 }
 
 // MARK: - Main Class
@@ -37,6 +38,10 @@ extension ExchangesListPresenter: ExchangesListPresenterProtocol {
 
     func showDetails(exchanges: ExchangeModel, exchangesLogo: ExchangeLogoModel) {
         coordinator.navigateToDetailsScene(exchanges: exchanges, exchangesLogo: exchangesLogo)
+    }
+    
+    func showError() {
+        viewController?.displayError()
     }
 }
 
