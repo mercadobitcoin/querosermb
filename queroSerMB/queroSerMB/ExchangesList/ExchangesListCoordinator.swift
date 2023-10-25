@@ -16,7 +16,7 @@ protocol ExchangesListCoordinatorProtocol: AnyObject {
 final class ExchangesListCoordinator {
     
     // MARK: - Properties
-    private var navigationController: UINavigationController
+    var navigationController: UINavigationController
     weak var viewController: UIViewController?
     
     // MARK: - Initializer

@@ -16,13 +16,13 @@ protocol ExchangesListViewControllerProtocol: AnyObject {
 class ExchangesListViewController: UIViewController {
     
     // MARK: - Properties
-    private lazy var searchBar: ExchangeSearchBar = {
+     lazy var searchBar: ExchangeSearchBar = {
         let searchBar = ExchangeSearchBar()
         searchBar.delegate = self
         return searchBar
     }()
     
-    private lazy var exchangeTable: ExchangesTableView = {
+     lazy var exchangeTable: ExchangesTableView = {
         let table = ExchangesTableView()
         table.exchangesDelegate = self
         return table
@@ -98,7 +98,9 @@ extension ExchangesListViewController: ViewSetup {
         let backItem = UIBarButtonItem()
         backItem.title = "Voltar"
         navigationItem.backBarButtonItem = backItem
-        
+        exchangeTable.accessibilityIdentifier = "ExchangesListTableViewAccessibilityIdentifier"
+        searchBar.accessibilityIdentifier = "ExchangeSearchBarAccessibilityIdentifier"
+        activityIndicator.accessibilityIdentifier = "SomeUniqueIdentifierForActivityIndicator"
         exchangeTable.isHidden = true
         activityIndicator.startAnimating()
     }
