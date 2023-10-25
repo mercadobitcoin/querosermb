@@ -17,13 +17,13 @@ protocol ExchangesListViewControllerProtocol: AnyObject {
 class ExchangesListViewController: UIViewController {
     
     // MARK: - Properties
-     lazy var searchBar: ExchangeSearchBar = {
+    private(set) lazy var searchBar: ExchangeSearchBar = {
         let searchBar = ExchangeSearchBar()
         searchBar.delegate = self
         return searchBar
     }()
     
-     lazy var exchangeTable: ExchangesTableView = {
+    private(set) lazy var exchangeTable: ExchangesTableView = {
         let table = ExchangesTableView()
         table.exchangesDelegate = self
         return table
@@ -51,7 +51,7 @@ class ExchangesListViewController: UIViewController {
         return button
     }()
     
-    private lazy var errorStackView: UIStackView = {
+    private(set) lazy var errorStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -62,7 +62,7 @@ class ExchangesListViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var activityIndicator: UIActivityIndicatorView = {
+    private(set) lazy var activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView()
         activity.style = .large
         activity.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)

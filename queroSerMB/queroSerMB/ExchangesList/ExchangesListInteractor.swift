@@ -19,7 +19,7 @@ protocol ExchangesListInteractorProtocol: AnyObject {
 final class ExchangesListInteractor {
     
     // MARK: - Private Properties
-    private var exchanges: [ExchangeModel] = []
+    private(set) var exchanges: [ExchangeModel] = []
     private var exchangesLogos: [ExchangeLogoModel] = []
     private let presenter: ExchangesListPresenterProtocol
     private let service: NetworkServiceProtocol

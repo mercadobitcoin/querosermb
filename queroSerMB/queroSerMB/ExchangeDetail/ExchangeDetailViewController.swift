@@ -26,7 +26,7 @@ class ExchangeDetailViewController: UIViewController {
         return label
     }()
     
-    private lazy var priceLabel: UILabel = {
+    private(set) lazy var priceLabel: UILabel = {
         let label = makeLabel(font: .boldSystemFont(ofSize: 16))
         return label
     }()
@@ -41,7 +41,7 @@ class ExchangeDetailViewController: UIViewController {
         return label
     }()
     
-    private lazy var intervalLabel: UILabel = {
+    private(set) lazy var intervalLabel: UILabel = {
         let label = makeLabel(font: .boldSystemFont(ofSize: 16))
         return label
     }()
@@ -57,12 +57,12 @@ class ExchangeDetailViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var btcButton: UIButton = {
+    private(set) lazy var btcButton: UIButton = {
         let button = makeButton(title: "BTC", action: #selector(didTapBTC))
         return button
     }()
     
-    private lazy var ethButton: UIButton = {
+    private(set) lazy var ethButton: UIButton = {
         let button = makeButton(title: "ETH", action: #selector(didTapETH))
         return button
     }()
@@ -72,7 +72,7 @@ class ExchangeDetailViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var chartView = LineChartView()
+    private(set) lazy var chartView = LineChartView()
     
     private lazy var legendLabel: UILabel = {
         let label = makeLabel(font: .systemFont(ofSize: 12), text: "* Volume transacionado pela exchange nas últimas 24 horas.")
@@ -80,13 +80,13 @@ class ExchangeDetailViewController: UIViewController {
         return label
     }()
     
-    private lazy var exchangeiconImageView: UIImageView = {
+    private(set) lazy var exchangeiconImageView: UIImageView = {
         let imageView = makeImageView(contentMode: .scaleAspectFill)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private lazy var exchangeNameLabel: UILabel = {
+    private(set) lazy var exchangeNameLabel: UILabel = {
         let label = makeLabel(font: .boldSystemFont(ofSize: 32))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -97,25 +97,25 @@ class ExchangeDetailViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var exchangeIdLabel: UILabel = {
+    private(set) lazy var exchangeIdLabel: UILabel = {
         let label = makeLabel(font: .boldSystemFont(ofSize: 16))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var exchangeVolumeTransactionHourLabel: UILabel = {
+    private(set) lazy var exchangeVolumeTransactionHourLabel: UILabel = {
         let label = makeLabel(font: .boldSystemFont(ofSize: 16))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var exchangeVolumeTransactionDayLabel: UILabel = {
+    private(set) lazy var exchangeVolumeTransactionDayLabel: UILabel = {
         let label = makeLabel(font: .boldSystemFont(ofSize: 16))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private lazy var exchangeVolumeTransactionMonthLabel: UILabel = {
+    private(set) lazy var exchangeVolumeTransactionMonthLabel: UILabel = {
         let label = makeLabel(font: .boldSystemFont(ofSize: 16))
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -136,7 +136,7 @@ class ExchangeDetailViewController: UIViewController {
         return view
     }()
     
-    private lazy var activityIndicator: UIActivityIndicatorView = {
+    private(set) lazy var activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView()
         activity.style = .large
         activity.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -166,7 +166,7 @@ class ExchangeDetailViewController: UIViewController {
         return button
     }()
     
-    private lazy var errorStackView: UIStackView = {
+    private(set) lazy var errorStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center

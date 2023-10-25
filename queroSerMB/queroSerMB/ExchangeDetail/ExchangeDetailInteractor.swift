@@ -9,7 +9,7 @@ import DGCharts
 import Foundation
 
 // MARK: - CryptoName Enum
-enum CryptoName {
+enum CryptoName: Equatable {
     case btc
     case eth
 }
@@ -73,11 +73,19 @@ extension ExchangeDetailInteractor: ExchangeDetailInteractorProtocol {
     }
     
     func ethGraph() {
-        presenter.updateChartData(data: ethDataEntries, priceData: ohlcvEthData[0], crypto: .eth)
+        guard let firstEthData = ohlcvEthData.first else {
+            presenter.showError()
+            return
+        }
+        presenter.updateChartData(data: ethDataEntries, priceData: firstEthData, crypto: .eth)
     }
-    
+
     func btcGraph() {
-        presenter.updateChartData(data: btcDataEntries, priceData: ohlcvBtcData[0], crypto: .btc)
+        guard let firstBtcData = ohlcvBtcData.first else {
+            presenter.showError()
+            return
+        }
+        presenter.updateChartData(data: btcDataEntries, priceData: firstBtcData, crypto: .btc)
     }
     
     func updatePriceValue(data: OHLCVData) {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ExchangeModel: Decodable {
+struct ExchangeModel: Decodable, Equatable {
     let name: String?
     let exchangeId: String?
     let hourVolumeUsd: Double?
@@ -23,7 +23,7 @@ struct ExchangeModel: Decodable {
     }
 }
 
-struct ExchangeLogoModel: Decodable {
+struct ExchangeLogoModel: Decodable, Equatable {
     let exchangeId: String?
     let url: URL?
     

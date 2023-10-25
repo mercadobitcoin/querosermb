@@ -25,4 +25,9 @@ class ExchangesListPresenterTests: XCTestCase {
         presenter.showList(exchanges: [mockExchange], exchangesLogo: [])
         XCTAssertTrue(mockViewController.displayListCalled)
     }
+    
+    func testShowError() {
+        presenter.showError()
+        XCTAssertTrue(mockViewController.displayErrorCalled)
+    }
 }
