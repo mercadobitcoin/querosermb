@@ -92,7 +92,7 @@ class ExchangeDetailViewController: UIViewController {
     }()
     
     private lazy var exchangeStackView: UIStackView = {
-        let stackView = makeStackView(axis: .horizontal, spacing: Spacing.space1)
+        let stackView = makeStackView(axis: .horizontal, distribution: .fill, spacing: Spacing.space1)
         return stackView
     }()
     
@@ -133,6 +133,14 @@ class ExchangeDetailViewController: UIViewController {
     private lazy var contentView: UIView = {
         let view = makeView()
         return view
+    }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView()
+        activity.style = .large
+        activity.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
     }()
     
     // MARK: - Life Cycle
@@ -213,7 +221,7 @@ extension ExchangeDetailViewController {
 // MARK: - ViewSetup
 extension ExchangeDetailViewController: ViewSetup {
     func setupHierarchy() {
-        view.addSubview(scrollView)
+        view.addSubviews(activityIndicator, scrollView)
         scrollView.addSubview(contentView)
         buttonStackView.addArrangedSubviews(btcButton,
                                             ethButton)
@@ -303,6 +311,11 @@ extension ExchangeDetailViewController: ViewSetup {
             exchangeVolumeStackView.topAnchor.constraint(equalTo: legendLabel.bottomAnchor, constant: Spacing.space2),
             exchangeVolumeTransactionMonthLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Spacing.space5)
         ])
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     func setupStyles() {
@@ -318,6 +331,13 @@ extension ExchangeDetailViewController: ViewSetup {
         view.backgroundColor = Colors.offBlack.color
         btcButton.backgroundColor = Colors.offGray.color
         setupChart()
+        scrollView.isHidden = true
+        activityIndicator.startAnimating()
+    }
+    
+    func stopLoading() {
+        scrollView.isHidden = false
+        activityIndicator.stopAnimating()
     }
     
     private func setupChart() {
@@ -366,6 +386,8 @@ extension ExchangeDetailViewController: ExchangeDetailViewControllerProtocol {
                 self.btcButton.backgroundColor = .clear
             }
         }
+        
+        stopLoading()
     }
     
     func updatePriceValue(text: String, interval: String) {

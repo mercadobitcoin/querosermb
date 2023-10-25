@@ -28,6 +28,14 @@ class ExchangesListViewController: UIViewController {
         return table
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView()
+        activity.style = .large
+        activity.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
+    }()
+    
     private let interactor: ExchangesListInteractorProtocol
     
     // MARK: - Initializers
@@ -61,7 +69,7 @@ class ExchangesListViewController: UIViewController {
 // MARK: - ViewSetup
 extension ExchangesListViewController: ViewSetup {
     func setupHierarchy() {
-        view.addSubviews(searchBar, exchangeTable)
+        view.addSubviews(activityIndicator, searchBar, exchangeTable)
     }
     
     func setupConstraints() {
@@ -78,6 +86,11 @@ extension ExchangesListViewController: ViewSetup {
             exchangeTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Spacing.space3),
             exchangeTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Spacing.space3)
         ])
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
     }
     
     func setupStyles() {
@@ -85,6 +98,14 @@ extension ExchangesListViewController: ViewSetup {
         let backItem = UIBarButtonItem()
         backItem.title = "Voltar"
         navigationItem.backBarButtonItem = backItem
+        
+        exchangeTable.isHidden = true
+        activityIndicator.startAnimating()
+    }
+    
+    func stopLoading() {
+        exchangeTable.isHidden = false
+        activityIndicator.stopAnimating()
     }
 }
 
@@ -116,5 +137,6 @@ extension ExchangesListViewController: ExchangesListViewControllerProtocol {
     func displayList(exchangeList: [ExchangeCellViewModel]) {
         exchangeTable.exchangeList = exchangeList
         exchangeTable.reloadData()
+        stopLoading()
     }
 }
