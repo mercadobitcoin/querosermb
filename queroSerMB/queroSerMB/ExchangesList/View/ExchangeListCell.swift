@@ -60,11 +60,8 @@ class ExchangeListCell: UITableViewCell {
 
     func setupConstraints() {
         exchangeiconImageView.translatesAutoresizingMaskIntoConstraints = false
+        exchangeNameLabel.translatesAutoresizingMaskIntoConstraints = false
         exchangeInfosStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        addSubviews(exchangeiconImageView,
-                    exchangeNameLabel,
-                    exchangeInfosStackView)
         
         NSLayoutConstraint.activate([
             exchangeiconImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Spacing.space5),
