@@ -26,17 +26,14 @@ class ExchangeCellViewModel {
     
     // MARK: - Initializers
     init(from model: ExchangeModel, logoUrl: URL?) {
-        self.name = model.name ?? "Desconhecido"
-        self.id = "ID: \(model.exchangeId ?? "Desconhecido")"
+        name = model.name ?? "Desconhecido"
+        id = "ID: \(model.exchangeId ?? "Desconhecido")"
         
-        if let volume = model.dailyVolumeUsd {
-            self.dailyVolumeUsdText = NumberFormatter.financial.string(fromValue: volume)
-        } else {
-            self.dailyVolumeUsdText = "$0"
-        }
+        let volume = model.dailyVolumeUsd ?? 0
+        dailyVolumeUsdText = NumberFormatter.financial.string(fromValue: volume)
         
-        self.exchangeIconURL = logoUrl
-        self.exchangeIconImage = ExchangeCellViewModel.cachedImage(for: logoUrl) ?? UIImage(named: "dollarLogo")?.withTintColor(.blue)
+        exchangeIconURL = logoUrl
+        exchangeIconImage = ExchangeCellViewModel.cachedImage(for: logoUrl) ?? UIImage(named: "dollarLogo")?.withTintColor(.blue)
     }
     
     // MARK: - Image Handling

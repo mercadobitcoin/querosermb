@@ -29,17 +29,9 @@ class ExchangesListViewController: UIViewController {
         return table
     }()
     
-    private lazy var exchangeErrorFetchListLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 32)
-        label.textColor = Colors.white.color
-        label.text = "Não foi possível carregar as informações"
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var exchangeErrorFetchListLabel: UILabel = UILabel.make(font: UIFont.boldSystemFont(ofSize: 32),
+                                                                         text: "Não foi possível carregar as informações",
+                                                                         textAlignment: .center)
     
     private lazy var retryFetchListButton: UIButton = {
         let button = UIButton()
@@ -51,16 +43,8 @@ class ExchangesListViewController: UIViewController {
         return button
     }()
     
-    private(set) lazy var errorStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
-        stackView.spacing = Spacing.space2
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.isHidden = true
-        return stackView
-    }()
+    private(set) lazy var errorStackView: UIStackView = UIStackView.make(distribution: .fillProportionally,
+                                                                         spacing: Spacing.space2)
     
     private(set) lazy var activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView()
@@ -91,12 +75,12 @@ class ExchangesListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     @objc func retryFetchList() {
@@ -113,6 +97,8 @@ extension ExchangesListViewController: ViewSetup {
     }
     
     func setupConstraints() {
+        errorStackView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Spacing.space2),
             searchBar.heightAnchor.constraint(equalToConstant: 40),
@@ -149,6 +135,7 @@ extension ExchangesListViewController: ViewSetup {
         searchBar.accessibilityIdentifier = "ExchangeSearchBarAccessibilityIdentifier"
         activityIndicator.accessibilityIdentifier = "SomeUniqueIdentifierForActivityIndicator"
         exchangeTable.isHidden = true
+        errorStackView.isHidden = true
         activityIndicator.startAnimating()
     }
     

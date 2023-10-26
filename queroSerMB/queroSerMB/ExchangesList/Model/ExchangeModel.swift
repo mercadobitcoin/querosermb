@@ -26,9 +26,4 @@ struct ExchangeModel: Decodable, Equatable {
 struct ExchangeLogoModel: Decodable, Equatable {
     let exchangeId: String?
     let url: URL?
-    
-    enum CodingKeys: String, CodingKey {
-        case exchangeId = "exchange_id"
-        case url = "url"
-    }
 }

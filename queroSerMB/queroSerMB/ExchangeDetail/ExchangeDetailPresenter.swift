@@ -19,9 +19,6 @@ protocol ExchangeDetailPresenterProtocol: AnyObject {
 final class ExchangeDetailPresenter {
     // MARK: - Properties
     weak var viewController: ExchangeDetailViewControllerProtocol?
-    
-    // MARK: - Initializers
-    init() {}
 }
 
 // MARK: - ExchangeDetailPresenterProtocol Implementation

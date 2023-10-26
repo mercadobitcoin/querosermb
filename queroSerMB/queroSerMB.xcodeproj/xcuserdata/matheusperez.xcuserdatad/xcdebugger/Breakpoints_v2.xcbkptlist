@@ -20,5 +20,85 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "067E6DAB-D520-453B-ADF9-B1E6804436FE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "queroSerMB/ExchangeDetail/ExchangeDetailInteractor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "btcGraph()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "222A4478-7D61-4FE8-8422-127973A8C259"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "queroSerMB/ExchangeDetail/ExchangeDetailInteractor.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "ethGraph()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2DD5021A-6CF4-4E02-A516-387E2F035950"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "queroSerMB/Network/NetworkService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "getOHLCVForMajorPairs(_:baseAsset:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2DD5021A-6CF4-4E02-A516-387E2F035950 - 1c820950bb7b94a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;queroSerMB.BinanceSymbol&gt;, Swift.Error&gt;) -&gt; () in queroSerMB.NetworkService.getOHLCVForMajorPairs(_: Swift.String, baseAsset: Swift.String, completion: (Swift.Result&lt;Swift.Array&lt;queroSerMB.OHLCVData&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "queroSerMB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matheusperez/Projetos/querosermb/queroSerMB/queroSerMB/Network/NetworkService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
+                  offsetFromSymbolStart = "1296">
+               </Location>
+               <Location
+                  uuid = "2DD5021A-6CF4-4E02-A516-387E2F035950 - 1c820950bb7b94a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Array&lt;queroSerMB.BinanceSymbol&gt;, Swift.Error&gt;) -&gt; () in queroSerMB.NetworkService.getOHLCVForMajorPairs(_: Swift.String, baseAsset: Swift.String, completion: (Swift.Result&lt;Swift.Array&lt;queroSerMB.OHLCVData&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "queroSerMB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/matheusperez/Projetos/querosermb/queroSerMB/queroSerMB/Network/NetworkService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "124"
+                  endingLineNumber = "124"
+                  offsetFromSymbolStart = "1340">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

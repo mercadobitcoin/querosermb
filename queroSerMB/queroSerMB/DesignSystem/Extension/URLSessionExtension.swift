@@ -10,7 +10,6 @@ import UIKit
 extension URLSession {
     func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void) -> URLSessionDataTask {
         let task = self.dataTask(with: url) { data, _, error in
-            // Imprimir qualquer erro
             if let error = error {
                 print("Failed to fetch image: \(error)")
                 DispatchQueue.main.async {

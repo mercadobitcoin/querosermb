@@ -38,6 +38,11 @@
 		ED1B68A02AE5903400F597F2 /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = ED1B689F2AE5903400F597F2 /* DGChartsDynamic */; };
 		ED1B68A32AE5991300F597F2 /* OHLCVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68A22AE5991300F597F2 /* OHLCVModel.swift */; };
 		ED7115F82AE726E300733CA8 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7115F72AE726E300733CA8 /* StringExtension.swift */; };
+		EDC4ABE52AEAB8E20099D0AA /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4ABE42AEAB8E20099D0AA /* UILabelExtension.swift */; };
+		EDC4ABE72AEABB1C0099D0AA /* UIStackViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4ABE62AEABB1C0099D0AA /* UIStackViewExtension.swift */; };
+		EDC4ABE92AEABDA00099D0AA /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4ABE82AEABDA00099D0AA /* UIButtonExtension.swift */; };
+		EDC4ABEB2AEABDEA0099D0AA /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4ABEA2AEABDEA0099D0AA /* UIImageViewExtension.swift */; };
+		EDC4ABED2AEABE480099D0AA /* UIScroolViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4ABEC2AEABE480099D0AA /* UIScroolViewExtension.swift */; };
 		EDCA6F8C2AE979B60055499B /* ExchangeDetailsProtocolsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA6F8B2AE979B60055499B /* ExchangeDetailsProtocolsMock.swift */; };
 		EDCA6F8E2AE97F320055499B /* ExchangesDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA6F8D2AE97F320055499B /* ExchangesDetailsViewControllerTests.swift */; };
 		EDCA6F952AE9A5DA0055499B /* ExchangeDetailInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCA6F942AE9A5DA0055499B /* ExchangeDetailInteractorTests.swift */; };
@@ -93,6 +98,11 @@
 		ED1B689A2AE586BB00F597F2 /* ExchangeDetailFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeDetailFactory.swift; sourceTree = "<group>"; };
 		ED1B68A22AE5991300F597F2 /* OHLCVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OHLCVModel.swift; sourceTree = "<group>"; };
 		ED7115F72AE726E300733CA8 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		EDC4ABE42AEAB8E20099D0AA /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		EDC4ABE62AEABB1C0099D0AA /* UIStackViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExtension.swift; sourceTree = "<group>"; };
+		EDC4ABE82AEABDA00099D0AA /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		EDC4ABEA2AEABDEA0099D0AA /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		EDC4ABEC2AEABE480099D0AA /* UIScroolViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScroolViewExtension.swift; sourceTree = "<group>"; };
 		EDCA6F8B2AE979B60055499B /* ExchangeDetailsProtocolsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeDetailsProtocolsMock.swift; sourceTree = "<group>"; };
 		EDCA6F8D2AE97F320055499B /* ExchangesDetailsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangesDetailsViewControllerTests.swift; sourceTree = "<group>"; };
 		EDCA6F942AE9A5DA0055499B /* ExchangeDetailInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeDetailInteractorTests.swift; sourceTree = "<group>"; };
@@ -192,6 +202,11 @@
 				ED1B688F2AE4BD1500F597F2 /* UITableViewExtension.swift */,
 				ED7115F72AE726E300733CA8 /* StringExtension.swift */,
 				EDED44122AE865AE00A0F6DE /* DoubleExtension.swift */,
+				EDC4ABE42AEAB8E20099D0AA /* UILabelExtension.swift */,
+				EDC4ABE62AEABB1C0099D0AA /* UIStackViewExtension.swift */,
+				EDC4ABE82AEABDA00099D0AA /* UIButtonExtension.swift */,
+				EDC4ABEA2AEABDEA0099D0AA /* UIImageViewExtension.swift */,
+				EDC4ABEC2AEABE480099D0AA /* UIScroolViewExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -385,6 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED1B68932AE5869800F597F2 /* ExchangeDetailViewController.swift in Sources */,
+				EDC4ABE72AEABB1C0099D0AA /* UIStackViewExtension.swift in Sources */,
 				ED1B688E2AE4BCDA00F597F2 /* URLSessionExtension.swift in Sources */,
 				ED1B68342AE479BE00F597F2 /* AppDelegate.swift in Sources */,
 				ED1B68882AE4A16700F597F2 /* ExchangeModel.swift in Sources */,
@@ -397,15 +413,19 @@
 				ED1B68902AE4BD1500F597F2 /* UITableViewExtension.swift in Sources */,
 				ED1B687A2AE48F5F00F597F2 /* ExchangeSearchBar.swift in Sources */,
 				EDED44132AE865AE00A0F6DE /* DoubleExtension.swift in Sources */,
+				EDC4ABEB2AEABDEA0099D0AA /* UIImageViewExtension.swift in Sources */,
 				ED1B68802AE4955C00F597F2 /* UIViewExtension.swift in Sources */,
 				ED1B68692AE47D4E00F597F2 /* ExchangesListPresenter.swift in Sources */,
 				ED1B68952AE586A100F597F2 /* ExchangeDetailInteractor.swift in Sources */,
+				EDC4ABE52AEAB8E20099D0AA /* UILabelExtension.swift in Sources */,
 				ED1B687C2AE4907900F597F2 /* ExchangeListCell.swift in Sources */,
 				ED1B688A2AE4AC3500F597F2 /* ExchangeCellViewModel.swift in Sources */,
+				EDC4ABE92AEABDA00099D0AA /* UIButtonExtension.swift in Sources */,
 				ED1B686B2AE47D5A00F597F2 /* ExchangesListCoordinator.swift in Sources */,
 				ED1B68672AE47D4000F597F2 /* ExchangesListInteractor.swift in Sources */,
 				ED1B68852AE4A0D400F597F2 /* NetworkService.swift in Sources */,
 				ED1B68752AE48CA600F597F2 /* ViewSetup.swift in Sources */,
+				EDC4ABED2AEABE480099D0AA /* UIScroolViewExtension.swift in Sources */,
 				ED1B68642AE47CBD00F597F2 /* ExchangesListViewController.swift in Sources */,
 				ED1B686D2AE47E8A00F597F2 /* ExchangesListFactory.swift in Sources */,
 				ED1B688C2AE4AFD000F597F2 /* NumberFormatterExtension.swift in Sources */,

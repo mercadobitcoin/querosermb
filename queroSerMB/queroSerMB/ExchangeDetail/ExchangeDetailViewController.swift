@@ -21,120 +21,60 @@ class ExchangeDetailViewController: UIViewController {
     // MARK: - Properties
     private let interactor: ExchangeDetailInteractorProtocol
     
-    private lazy var legendPriceLabel: UILabel = {
-        let label = makeLabel(text: "Valor transacionado:")
-        return label
-    }()
+    private lazy var legendPriceLabel: UILabel = UILabel.make(text: "Valor transacionado:")
     
-    private(set) lazy var priceLabel: UILabel = {
-        let label = makeLabel(font: .boldSystemFont(ofSize: 16))
-        return label
-    }()
+    private(set) lazy var priceLabel: UILabel = UILabel.make(font: .boldSystemFont(ofSize: 16))
     
-    private lazy var priceStackView: UIStackView = {
-        let stackView = makeStackView()
-        return stackView
-    }()
+    private lazy var priceStackView: UIStackView = UIStackView.make()
     
-    private lazy var legendIntervalLabel: UILabel = {
-        let label = makeLabel(text: "Intervalo:")
-        return label
-    }()
+    private lazy var legendIntervalLabel: UILabel = UILabel.make(text: "Intervalo:")
     
-    private(set) lazy var intervalLabel: UILabel = {
-        let label = makeLabel(font: .boldSystemFont(ofSize: 16))
-        return label
-    }()
+    private(set) lazy var intervalLabel: UILabel = UILabel.make(font: .boldSystemFont(ofSize: 16))
     
-    private lazy var intervalStackView: UIStackView = {
-        let stackView = makeStackView(distribution: .fillProportionally)
-        return stackView
-    }()
+    private lazy var intervalStackView: UIStackView = UIStackView.make(distribution: .fillProportionally)
     
-    private lazy var groupPriceAndIntervalStackView: UIStackView = {
-        let stackView = makeStackView(axis: .horizontal)
-        stackView.spacing = 8
-        return stackView
-    }()
+    private lazy var groupPriceAndIntervalStackView: UIStackView = UIStackView.make(axis: .horizontal,
+                                                                                    spacing: Spacing.space1)
     
-    private(set) lazy var btcButton: UIButton = {
-        let button = makeButton(title: "BTC", action: #selector(didTapBTC))
-        return button
-    }()
+    private(set) lazy var btcButton: UIButton = UIButton.make(title: "BTC",
+                                                              target: self,
+                                                              action: #selector(didTapBTC))
     
-    private(set) lazy var ethButton: UIButton = {
-        let button = makeButton(title: "ETH", action: #selector(didTapETH))
-        return button
-    }()
+    private(set) lazy var ethButton: UIButton =  UIButton.make(title: "ETH",
+                                                               target: self,
+                                                               action: #selector(didTapETH))
     
-    private lazy var buttonStackView: UIStackView = {
-        let stackView = makeStackView(axis: .horizontal, distribution: .fillEqually)
-        return stackView
-    }()
+    private lazy var buttonStackView: UIStackView = UIStackView.make(axis: .horizontal,
+                                                                     distribution: .fillEqually)
     
     private(set) lazy var chartView = LineChartView()
     
-    private lazy var legendLabel: UILabel = {
-        let label = makeLabel(font: .systemFont(ofSize: 12), text: "* Volume transacionado pela exchange nas últimas 24 horas.")
-        label.numberOfLines = 0
-        return label
-    }()
+    private lazy var legendLabel: UILabel = UILabel.make(font: .systemFont(ofSize: 12),
+                                                         text: "* Volume transacionado pela exchange nas últimas 24 horas.")
     
-    private(set) lazy var exchangeiconImageView: UIImageView = {
-        let imageView = makeImageView(contentMode: .scaleAspectFill)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private(set) lazy var exchangeiconImageView: UIImageView = UIImageView.make(contentMode: .scaleAspectFill)
     
-    private(set) lazy var exchangeNameLabel: UILabel = {
-        let label = makeLabel(font: .boldSystemFont(ofSize: 32))
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private(set) lazy var exchangeNameLabel: UILabel = UILabel.make(font: .boldSystemFont(ofSize: 32))
     
-    private lazy var exchangeStackView: UIStackView = {
-        let stackView = makeStackView(axis: .horizontal, distribution: .fill, spacing: Spacing.space1)
-        return stackView
-    }()
+    private lazy var exchangeStackView: UIStackView = UIStackView.make(axis: .horizontal,
+                                                                       distribution: .fill, spacing: Spacing.space1)
     
-    private(set) lazy var exchangeIdLabel: UILabel = {
-        let label = makeLabel(font: .boldSystemFont(ofSize: 16))
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private(set) lazy var exchangeIdLabel: UILabel = UILabel.make(font: .boldSystemFont(ofSize: 16))
     
-    private(set) lazy var exchangeVolumeTransactionHourLabel: UILabel = {
-        let label = makeLabel(font: .boldSystemFont(ofSize: 16))
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private(set) lazy var exchangeVolumeTransactionHourLabel: UILabel = UILabel.make(font: .boldSystemFont(ofSize: 16))
     
-    private(set) lazy var exchangeVolumeTransactionDayLabel: UILabel = {
-        let label = makeLabel(font: .boldSystemFont(ofSize: 16))
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private(set) lazy var exchangeVolumeTransactionDayLabel: UILabel = UILabel.make(font: .boldSystemFont(ofSize: 16))
     
-    private(set) lazy var exchangeVolumeTransactionMonthLabel: UILabel = {
-        let label = makeLabel(font: .boldSystemFont(ofSize: 16))
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private(set) lazy var exchangeVolumeTransactionMonthLabel: UILabel = UILabel.make(font: .boldSystemFont(ofSize: 16))
     
-    private lazy var scrollView: UIScrollView = {
-        let scrollView = makeScrollView()
-        return scrollView
-    }()
+    private lazy var scrollView: UIScrollView = UIScrollView.make()
     
-    private lazy var exchangeVolumeStackView: UIStackView = {
-        let stackView = makeStackView(axis: .vertical, distribution: .fillEqually, alignment: .leading, spacing: Spacing.space1)
-        return stackView
-    }()
+    private lazy var exchangeVolumeStackView: UIStackView = UIStackView.make(axis: .vertical,
+                                                                             distribution: .fillEqually,
+                                                                             alignment: .leading,
+                                                                             spacing: Spacing.space1)
     
-    private lazy var contentView: UIView = {
-        let view = makeView()
-        return view
-    }()
+    private lazy var contentView: UIView = UIView()
     
     private(set) lazy var activityIndicator: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView()
@@ -144,17 +84,9 @@ class ExchangeDetailViewController: UIViewController {
         return activity
     }()
     
-    private lazy var exchangeErrorFetchListLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 32)
-        label.textColor = Colors.white.color
-        label.text = "Não foi possível carregar as informações"
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var exchangeErrorFetchListLabel: UILabel = UILabel.make(font: UIFont.boldSystemFont(ofSize: 32),
+                                                                         text: "Não foi possível carregar as informações",
+                                                                         textAlignment: .center)
     
     private lazy var retryFetchListButton: UIButton = {
         let button = UIButton()
@@ -166,16 +98,8 @@ class ExchangeDetailViewController: UIViewController {
         return button
     }()
     
-    private(set) lazy var errorStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
-        stackView.spacing = Spacing.space2
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.isHidden = true
-        return stackView
-    }()
+    private(set) lazy var errorStackView: UIStackView = UIStackView.make(distribution: .fillProportionally,
+                                                                         spacing: Spacing.space2)
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -190,55 +114,7 @@ class ExchangeDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Help Makers
-    private func makeLabel(font: UIFont = UIFont.systemFont(ofSize: 16), text: String? = nil) -> UILabel {
-        let label = UILabel()
-        label.font = font
-        label.textColor = Colors.white.color
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.text = text
-        return label
-    }
-    
-    private func makeStackView(axis: NSLayoutConstraint.Axis = .vertical, distribution: UIStackView.Distribution = .fillEqually, alignment: UIStackView.Alignment = .center,spacing: CGFloat = 4) -> UIStackView {
-        let stackView = UIStackView()
-        stackView.axis = axis
-        stackView.alignment = alignment
-        stackView.distribution = distribution
-        stackView.spacing = spacing
-        return stackView
-    }
-    
-    private func makeButton(title: String, action: Selector) -> UIButton {
-        let button = UIButton()
-        button.setTitle(title, for: .normal)
-        button.addTarget(self, action: action, for: .touchUpInside)
-        return button
-    }
-    
-    private func makeImageView(contentMode: UIView.ContentMode = .scaleAspectFill) -> UIImageView {
-        let imageView = UIImageView()
-        imageView.contentMode = contentMode
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }
-    
-    private func makeScrollView() -> UIScrollView {
-        let scrollView = UIScrollView()
-        scrollView.isScrollEnabled = true
-        scrollView.isUserInteractionEnabled = true
-        return scrollView
-    }
-    
-    private func makeView() -> UIView {
-        let view = UIView()
-        return view
-    }
+    required init?(coder: NSCoder) { nil }
 }
 
 // MARK: - Actions
@@ -246,7 +122,7 @@ extension ExchangeDetailViewController {
     @objc func didTapBTC() {
         interactor.btcGraph()
     }
-
+    
     @objc func didTapETH() {
         interactor.ethGraph()
     }
@@ -294,6 +170,8 @@ extension ExchangeDetailViewController: ViewSetup {
         exchangeVolumeStackView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        exchangeiconImageView.translatesAutoresizingMaskIntoConstraints = false
+        errorStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -378,6 +256,7 @@ extension ExchangeDetailViewController: ViewSetup {
         view.backgroundColor = Colors.offBlack.color
         btcButton.backgroundColor = Colors.offGray.color
         setupChart()
+        errorStackView.isHidden = true
         scrollView.isHidden = true
         activityIndicator.startAnimating()
     }

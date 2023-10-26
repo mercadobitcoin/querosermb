@@ -10,7 +10,6 @@ import Foundation
 // MARK: - Protocols
 protocol ExchangesListInteractorProtocol: AnyObject {
     func callServices()
-    func getExchangeList() -> [ExchangeModel]
     func filterExchanges(with text: String)
     func showDetails(indexPath: IndexPath)
 }
@@ -40,10 +39,6 @@ extension ExchangesListInteractor: ExchangesListInteractorProtocol {
                 self?.presenter.showList(exchanges: self?.exchanges ?? [], exchangesLogo: self?.exchangesLogos ?? [])
             })
         }
-    }
-
-    func getExchangeList() -> [ExchangeModel] {
-        return exchanges
     }
     
     func filterExchanges(with text: String) {
@@ -78,7 +73,7 @@ private extension ExchangesListInteractor {
             case .success(let fetchedExchanges):
                 self?.exchanges = fetchedExchanges
                 completion()
-            case .failure(let error):
+            case .failure:
                 self?.presenter.showError()
             }
         }

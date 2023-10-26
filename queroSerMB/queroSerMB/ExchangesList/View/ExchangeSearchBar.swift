@@ -14,10 +14,7 @@ class ExchangeSearchBar: UISearchTextField {
         setupView()
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupView()
-    }
+    required init?(coder: NSCoder) { nil }
     
     // MARK: - Setup Methods
     private func setupView() {

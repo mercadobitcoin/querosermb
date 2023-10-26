@@ -16,7 +16,7 @@ protocol NetworkServiceProtocol {
 class NetworkService: NetworkServiceProtocol {
     
     private let baseURLString = "https://rest.coinapi.io/v1"
-    private let apiKey = "ED1DAC3A-A510-488D-9B60-3E3D47A2C6C6"
+    private let apiKey = "3807A772-1841-409F-B8DA-5A2E2110A687"
     
     private let dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -96,6 +96,7 @@ class NetworkService: NetworkServiceProtocol {
             
             do {
                 let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let logos = try decoder.decode([ExchangeLogoModel].self, from: data)
                 DispatchQueue.main.async {
                     completion(.success(logos))
@@ -114,10 +115,10 @@ class NetworkService: NetworkServiceProtocol {
         fetchBinanceSymbols(for: exchangeId) { result in
             switch result {
             case .success(let symbols):
-                let majorQuoteAssets = ["USDC"]
+                let majorQuoteAssets = ["USDC", "USD"]
                 
                 let filteredSymbols = symbols.filter {
-                    baseAsset == $0.asset_id_base && majorQuoteAssets.contains($0.asset_id_quote)
+                    baseAsset == $0.assetIdBase && majorQuoteAssets.contains($0.assetIdQuote)
                 }
                 
                 guard !filteredSymbols.isEmpty else {
@@ -138,7 +139,7 @@ class NetworkService: NetworkServiceProtocol {
                     
                     let formattedTimeStart = self.dateFormatter.string(from: timeStart)
                     let formattedTimeEnd = self.dateFormatter.string(from: timeEnd)
-                    var ohlcvURLString = "\(self.baseURLString)/ohlcv/\(exchangeId)_SPOT_\(symbol.asset_id_base)_\(symbol.asset_id_quote)/history?period_id=\(periodId)&time_start=\(formattedTimeStart)&time_end=\(formattedTimeEnd)"
+                    var ohlcvURLString = "\(self.baseURLString)/ohlcv/\(exchangeId)_SPOT_\(symbol.assetIdBase)_\(symbol.assetIdQuote)/history?period_id=\(periodId)&time_start=\(formattedTimeStart)&time_end=\(formattedTimeEnd)"
                     
                     var ohlcvRequest = URLRequest(url: URL(string: ohlcvURLString)!)
                     ohlcvRequest.addValue(self.apiKey, forHTTPHeaderField: "X-CoinAPI-Key")
@@ -148,6 +149,7 @@ class NetworkService: NetworkServiceProtocol {
                             do {
                                 let decoder = JSONDecoder()
                                 decoder.dateDecodingStrategy = .formatted(self.dateFormatter)
+                                decoder.keyDecodingStrategy = .convertFromSnakeCase
                                 let ohlcvData = try decoder.decode([OHLCVData].self, from: data)
                                 ohlcvDataList.append(contentsOf: ohlcvData)
                             } catch let decodeError {
@@ -200,6 +202,7 @@ private extension NetworkService {
             
             do {
                 let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let symbols = try decoder.decode([BinanceSymbol].self, from: data)
                 DispatchQueue.main.async {
                     completion(.success(symbols))

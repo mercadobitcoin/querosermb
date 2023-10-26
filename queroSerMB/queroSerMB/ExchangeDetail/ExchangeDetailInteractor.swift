@@ -25,14 +25,14 @@ protocol ExchangeDetailInteractorProtocol: AnyObject {
 // MARK: - Main Class
 final class ExchangeDetailInteractor {
     // MARK: - Private Properties
-    private var exchanges: ExchangeModel
-    private var exchangesLogos: ExchangeLogoModel
+    private let presenter: ExchangeDetailPresenterProtocol
+    private let service: NetworkServiceProtocol
+    private let exchanges: ExchangeModel
+    private let exchangesLogos: ExchangeLogoModel
     private var ohlcvEthData: [OHLCVData] = []
     private var ohlcvBtcData: [OHLCVData] = []
     private var ethDataEntries: [BarChartDataEntry] = []
     private var btcDataEntries: [BarChartDataEntry] = []
-    private let presenter: ExchangeDetailPresenterProtocol
-    private let service: NetworkServiceProtocol
     
     // MARK: - Initializer
     init(exchanges: ExchangeModel,

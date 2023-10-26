@@ -17,43 +17,17 @@ class ExchangeListCell: UITableViewCell {
     }
 
     // MARK: - UI Components
-    private lazy var exchangeiconImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    private lazy var exchangeiconImageView: UIImageView = UIImageView.make(contentMode: .scaleAspectFill)
 
-    private lazy var exchangeNameLabel: UILabel = {
-        let label = makeLabel(fontSize: 14)
-        return label
-    }()
+    private lazy var exchangeNameLabel: UILabel = UILabel.make(font: .boldSystemFont(ofSize: 14))
 
-    private lazy var exchangeIdLabel: UILabel = {
-        let label = makeLabel(fontSize: 14)
-        return label
-    }()
+    private lazy var exchangeIdLabel: UILabel = UILabel.make(font: .boldSystemFont(ofSize: 14))
 
-    private lazy var exchangeVolumeTransactionDayLabel: UILabel = {
-        let label = makeLabel(fontSize: 20)
-        return label
-    }()
+    private lazy var exchangeVolumeTransactionDayLabel: UILabel = UILabel.make(font: .boldSystemFont(ofSize: 20))
 
-    private lazy var timePeriodLabel: UILabel = {
-        let label = makeLabel(fontSize: 12)
-        label.text = "Em 24 horas"
-        return label
-    }()
+    private lazy var timePeriodLabel: UILabel = UILabel.make(font: .boldSystemFont(ofSize: 12), text: "Em 24 horas")
     
-    private lazy var exchangeInfosStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .leading
-        stackView.distribution = .fillEqually
-        stackView.spacing = Spacing.space2
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
+    private lazy var exchangeInfosStackView: UIStackView = UIStackView.make(alignment: .leading, spacing: Spacing.space2)
 
     // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -61,9 +35,7 @@ class ExchangeListCell: UITableViewCell {
         setupViews()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder: NSCoder) { nil }
 
     // MARK: - View Lifecycle
     override func prepareForReuse() {
@@ -80,14 +52,17 @@ class ExchangeListCell: UITableViewCell {
     }
 
     private func setupVisualAppearance() {
-        self.backgroundColor = Colors.offGray.color
-        self.layer.cornerRadius = 10
-        self.layer.masksToBounds = true
-        self.selectionStyle = .none
+        backgroundColor = Colors.offGray.color
+        layer.cornerRadius = 10
+        layer.masksToBounds = true
+        selectionStyle = .none
     }
 
     func setupConstraints() {
-        addSubviews(exchangeiconImageView, 
+        exchangeiconImageView.translatesAutoresizingMaskIntoConstraints = false
+        exchangeInfosStackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubviews(exchangeiconImageView,
                     exchangeNameLabel,
                     exchangeInfosStackView)
         
@@ -122,14 +97,5 @@ class ExchangeListCell: UITableViewCell {
                 self?.exchangeiconImageView.image = image
             }
         }
-    }
-
-    // MARK: - Utility Methods
-    private func makeLabel(fontSize: CGFloat) -> UILabel {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: fontSize)
-        label.textColor = Colors.white.color
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
     }
 }
