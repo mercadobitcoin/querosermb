@@ -35,7 +35,6 @@
 		ED1B68972AE586A900F597F2 /* ExchangeDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68962AE586A900F597F2 /* ExchangeDetailPresenter.swift */; };
 		ED1B689B2AE586BB00F597F2 /* ExchangeDetailFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B689A2AE586BB00F597F2 /* ExchangeDetailFactory.swift */; };
 		ED1B689E2AE5903400F597F2 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = ED1B689D2AE5903400F597F2 /* DGCharts */; };
-		ED1B68A02AE5903400F597F2 /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = ED1B689F2AE5903400F597F2 /* DGChartsDynamic */; };
 		ED1B68A32AE5991300F597F2 /* OHLCVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1B68A22AE5991300F597F2 /* OHLCVModel.swift */; };
 		ED7115F82AE726E300733CA8 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7115F72AE726E300733CA8 /* StringExtension.swift */; };
 		EDC4ABE52AEAB8E20099D0AA /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC4ABE42AEAB8E20099D0AA /* UILabelExtension.swift */; };
@@ -120,7 +119,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED1B68A02AE5903400F597F2 /* DGChartsDynamic in Frameworks */,
 				ED1B689E2AE5903400F597F2 /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,7 +308,6 @@
 			name = queroSerMB;
 			packageProductDependencies = (
 				ED1B689D2AE5903400F597F2 /* DGCharts */,
-				ED1B689F2AE5903400F597F2 /* DGChartsDynamic */,
 			);
 			productName = queroSerMB;
 			productReference = ED1B68302AE479BE00F597F2 /* queroSerMB.app */;
@@ -740,11 +737,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ED1B689C2AE58F9200F597F2 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
-		};
-		ED1B689F2AE5903400F597F2 /* DGChartsDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = ED1B689C2AE58F9200F597F2 /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = DGChartsDynamic;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
