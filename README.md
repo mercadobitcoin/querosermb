@@ -4,7 +4,7 @@ Somos a maior plataforma de negociação de criptomoedas e ativos alternativos d
 
 ### Objetivo
 
-O objetivo deste desafio é entender seus conhecimentos sobre a plataforma iOS, estilo de programação e como você resolve desafios técnicos.
+O objetivo deste desafio é entender seus conhecimentos, estilo de programação e como você resolve desafios técnicos.
 
 ### Projeto
 Criar um aplicativo para consultar a [coinapi.io](https://docs.coinapi.io/?shell#list-all-exchanges-get) e trazer as exchanges em forma de lista.
@@ -16,15 +16,21 @@ Criar um aplicativo para consultar a [coinapi.io](https://docs.coinapi.io/?shell
 -   **Tela de detalhe:**
     - Exibe os detalhes da exchange.
 
-### Requisitos Técnicos (iOS)
-- Swift 5+
-- View Code
-- Testes unitários
-- Testes de UI
+### Requisitos Técnicos
+|      Android       |     iOS            |
+| ------------------ | ------------------ |
+| Kotlin             |  Swift 5+          |
+| Compose            |  View Code         |
+| Testes unitários   |  Testes unitários  |
+| Testes de UI       |  Testes de UI      |
 
 #### Arquitetura
 
-Sinta-se à vontade para utilizar a arquitetura que melhor atender o projeto proposto. Aqui no Mercado Bitcoin utilizamos MVVM-C e VIP-C.
+Sinta-se à vontade para utilizar a arquitetura que melhor atender o projeto proposto. Aqui no Mercado Bitcoin utilizamos 
+
+|      Android       |     iOS            |
+| ------------------ | ------------------ |
+| MVVM com Clean     |  MVVM-C e VIP-C    | 
 
 ### Requisitos não funcionais
 
