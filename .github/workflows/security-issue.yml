@@ -1,0 +1,34 @@
+name: Security Issue Notification
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  notify:
+    if: github.event.label.name == 'security' || contains(github.event.issue.labels.*.name, 'security')
+    runs-on: self-hosted
+    env:
+      API_ENDPOINT: ${{ secrets.JIRA_INCOMING_HOOK_SECURITY_ISSUES }}
+    steps:
+      - name: Install jq
+        run: sudo apt-get install jq -y
+
+      - name: Send POST request
+        env:
+          ISSUE_VALIDATION: "Github Issue Replication - SecOps"
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          ISSUE_BODY: ${{ toJson(github.event.issue.body) }}
+          ISSUE_TITLE: ${{ github.event.issue.title}}
+        run: |
+          payload=$(jq -n \
+                      --arg url "$ISSUE_URL" \
+                      --arg body "$ISSUE_BODY" \
+                      --arg issue_title "$ISSUE_TITLE" \
+                      --arg auth "$ISSUE_VALIDATION" \
+                      '{issue_url: $url, comment: $body, issue_title: $issue_title, auth: $auth}')
+                      
+          curl \
+               -H "Content-Type: application/json" \
+               -d "$payload" \
+               "$API_ENDPOINT"
