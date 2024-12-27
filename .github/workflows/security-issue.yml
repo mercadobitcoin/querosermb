@@ -6,27 +6,49 @@ on:
 
 jobs:
   notify:
-    if: github.event.label.name == 'security' || contains(github.event.issue.labels.*.name, 'security')
+    if: github.event.label.name == 'security2' || contains(github.event.issue.labels.*.name, 'security2')
     runs-on: self-hosted
     env:
       API_ENDPOINT: ${{ secrets.JIRA_INCOMING_HOOK_SECURITY_ISSUES }}
     steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Mark Git repository as safe
+        run: |
+          git config --global --add safe.directory $GITHUB_WORKSPACE
+
       - name: Install jq
         run: sudo apt-get install jq -y
+
+      - name: Get last committer username (final fix with regex)
+        id: get_committer_username
+        run: |
+          author_name=$(git log -1 --pretty=format:'%an')
+
+          # Remove the '-mb' part from the name
+          author_name=$(echo "$author_name" | sed 's/-mb//g')
+
+          # Format the username as required
+          committer_username="${author_name,,}-mb"
+
+          echo "committer_username=$committer_username" >> $GITHUB_ENV
 
       - name: Send POST request
         env:
           ISSUE_VALIDATION: "Github Issue Replication - SecOps"
           ISSUE_URL: ${{ github.event.issue.html_url }}
           ISSUE_BODY: ${{ toJson(github.event.issue.body) }}
-          ISSUE_TITLE: ${{ github.event.issue.title}}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          COMMITTER_USERNAME: ${{ env.committer_username }}
         run: |
           payload=$(jq -n \
                       --arg url "$ISSUE_URL" \
                       --arg body "$ISSUE_BODY" \
                       --arg issue_title "$ISSUE_TITLE" \
+                      --arg username "$COMMITTER_USERNAME" \
                       --arg auth "$ISSUE_VALIDATION" \
-                      '{issue_url: $url, comment: $body, issue_title: $issue_title, auth: $auth}')
+                      '{issue_url: $url, comment: $body, issue_title: $issue_title, committer_username: $username, auth: $auth}')
                       
           curl \
                -H "Content-Type: application/json" \
